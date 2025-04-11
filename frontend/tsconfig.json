@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "strict": true,
+    "emitDeclarationOnly": false,
+    "resolveJsonModule": true,
+    "moduleResolution": "Node",
+    "module": "ESNext",
+    "target": "ESNext",
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "declaration": false,
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "skipLibCheck": true,
+    "types": ["vuetify", "node", "vite/client"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+    },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue",
+  ],
+  "exclude": ["node_modules", "dist"]}

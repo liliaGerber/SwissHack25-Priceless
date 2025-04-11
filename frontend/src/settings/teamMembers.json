@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Max Muster",
+    "email": "johndoegmail.com",
+    "role": "Business Analyst",
+    "linkedin": "https://www.linkedin.com/in/johndoe",
+    "phone": "123-456-7890",
+    "description": "I am a business analyst with 5 years of experience in the IT industry. I have worked on various projects in different domains like finance, healthcare, and e-commerce. I am a quick learner and a team player.",
+    "profilePic": "src/assets/TeamPhotos/defaultProfilePicture.png"
+  },
+  {
+    "name": "John Doe",
+    "email": "johndoegmail.com",
+    "role": "Developer",
+    "linkedin": "https://www.linkedin.com/in/johndoe",
+    "phone": "123-456-7890",
+    "description": "I am a full stack developer with 5 years of experience in web development. I have worked with various technologies like React, Angular, Node.js, Express.js, MongoDB, etc. I am a quick learner and a team player. I am open to relocation. ",
+    "profilePic": "src/assets/TeamPhotos/defaultProfilePicture.png"
+  },
+  {
+    "name": "Jane Doe",
+    "email": "janedoe@gmail.com",
+    "role": "Developer",
+    "linkedin": "https://www.linkedin.com/in/johndoe",
+    "phone": "123-456-7890",
+    "description": "I am a full stack developer with 5 years of experience in web development. I have worked with various technologies like React, Angular, Node.js, Express.js, MongoDB, etc. I am passionate about coding and always looking for new challenges. ",
+    "profilePic": "src/assets/TeamPhotos/defaultProfilePicture.png"
+  },
+  {
+    "name": "Jane Doe",
+    "email": "janedoe@gmail.com",
+    "role": "Developer",
+    "linkedin": "https://www.linkedin.com/in/johndoe",
+    "phone": "123-456-7890",
+    "description": "I am a full stack developer with 5 years of experience in web development. I have worked with various technologies like React, Angular, Node.js, Express.js, MongoDB, etc. ",
+    "profilePic": "src/assets/TeamPhotos/defaultProfilePicture.png"
+  }
+]

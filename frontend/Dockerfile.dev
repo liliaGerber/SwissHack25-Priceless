@@ -1,0 +1,22 @@
+# syntax=docker/dockerfile:1.4
+
+# Use a Node image for development
+FROM node:23-alpine AS dev
+
+WORKDIR /app
+
+# Install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy the project files
+COPY . .
+
+# Expose the Vite development server port
+EXPOSE 5173
+
+# Set Vite environment variables for development
+ENV NODE_ENV=development
+
+# Run Vite with hot reloading
+CMD ["npm", "run", "dev", "--", "--host"]
