@@ -34,3 +34,32 @@ docker compose -f compose.prod.yml down --volumes
 - Image: `mongo:latest`
 - Exposed Ports: `27017:27017`, `27017:27017`
 
+
+## Python Dependencies
+ - It needs to be done with pyenv.
+    - Install pyenv with the following command:
+        ```bash
+        curl https://pyenv.run | bash
+        ```
+    - Add the following lines to your shell configuration file (e.g., `~/.bashrc`, `~/.zshrc`):
+        ```
+            export PYENV_ROOT="$HOME/.pyenv"
+            [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+            eval "$(pyenv init - bash)"
+        ```
+    - Restart your shell or run `source ~/.bashrc` or `source ~/.zshrc`.
+    - Install the required Python version:
+        ```
+        pyenv install 3.13.1
+        ```
+    - Create a virtual environment:
+        ```
+        cd backend
+        ${HOME}/.pyenv/versions/3.13.1/bin/python -m venv venv
+        ```
+
+  - Activate the virtual environment:
+        ```
+        source venv/bin/activate
+        ```
+  - When installing new dependencies, include the version that is used in the required python requirements.txt file.
