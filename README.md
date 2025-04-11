@@ -43,19 +43,20 @@ docker compose -f compose.prod.yml down --volumes
         ```
     - Add the following lines to your shell configuration file (e.g., `~/.bashrc`, `~/.zshrc`):
         ```
-            export PATH="$HOME/.pyenv/bin:$PATH"
-            eval "$(pyenv init --path)"
-            eval "$(pyenv init -)"
-            eval "$(pyenv virtualenv-init -)"
+            export PYENV_ROOT="$HOME/.pyenv"
+            [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+            eval "$(pyenv init - bash)"
         ```
     - Restart your shell or run `source ~/.bashrc` or `source ~/.zshrc`.
     - Install the required Python version:
         ```
-        pyenv install 3.13.2
+        pyenv install 3.13.1
         ```
     - Create a virtual environment:
         ```
-        ${HOME}/.pyenv/versions/3.13.2/bin/python -m venv venv
+        cd backend
+        ${HOME}/.pyenv/versions/3.13.1/bin/python -m venv venv
+        ```
 
   - Activate the virtual environment:
         ```
