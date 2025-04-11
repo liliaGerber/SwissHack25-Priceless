@@ -2,3 +2,5 @@ flask==3.0.2
 flask-cors==4.0.0
 gunicorn==23.0.0
 pymongo==4.11
+torch==2.6.0
+transformers==4.51.2

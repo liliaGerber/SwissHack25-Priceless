@@ -30,7 +30,7 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 USER appuser
 
 # Expose the Flask app port
-EXPOSE 5000
+EXPOSE 5555
 
 # Use Gunicorn for production
-ENTRYPOINT ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
+ENTRYPOINT ["gunicorn", "-b", "0.0.0.0:5555", "app:app"]
