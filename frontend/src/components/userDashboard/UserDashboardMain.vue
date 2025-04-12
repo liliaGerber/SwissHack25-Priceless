@@ -9,7 +9,7 @@
 
       <!-- Right Column -->
       <v-col cols="12" md="8">
-        <FinancialStats />
+        <BankAccountsCard />
         <CreditScoreCard/>
         <BehaviorOverview class="mt-6" />
 
@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 import UserInfo from './UserInfo.vue'
-import FinancialStats from './FinancialStats.vue'
+import BankAccountsCard from './BankAccountsCard.vue'
 import BehaviorOverview from './BehaviorOverview.vue'
 import DocumentUploader from './DocumentUploader.vue'
 import CreditScoreCard from './CreditScoreCard.vue'
