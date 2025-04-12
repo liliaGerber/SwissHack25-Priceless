@@ -46,3 +46,8 @@ def seed_database():
     # Run seeds
     seed_advisors()
     seed_customers()
+
+if __name__ == "__main__":
+    seed_database()
+    print("Database seeded successfully.")
+    client.close()
