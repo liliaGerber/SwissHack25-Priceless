@@ -1,10 +1,9 @@
 <template>
   <v-card
-      flat
-      class="bg-background text-white px-6 py-5 rounded-xl w-full max-w-fit"
+      class="bg-background text-white mt-0 rounded-xl w-full"
   >
     <!-- Title Row -->
-    <div class="flex items-center gap-2 mb-2">
+    <div class="flex items-center mb-2">
       <h2 class="text-lg font-semibold px-6 pt-0 pb-0">Customer Summary</h2>
     </div>
 
@@ -21,5 +20,9 @@
 </template>
 
 <script lang="ts" setup>
-import {customer} from '../../data/customer.ts';
+import {Customer} from "@/types/Customer.ts";
+
+const props = defineProps<{
+  customer: Customer
+}>()
 </script>

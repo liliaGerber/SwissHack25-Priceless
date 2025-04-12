@@ -1,15 +1,13 @@
 <template>
-  <v-container class=" bg-background text-white px-6 py-8 rounded-xl mx-auto space-y-8">
-
     <!-- Accounts -->
     <v-card flat class="bg-background p-0 rounded-xl overflow-hidden">
-      <h2 class="text-lg font-semibold px-6 pt-6 pb-2">Bank Accounts</h2>
+      <h2 class="text-lg font-semibold px-6 pb-2">Bank Accounts</h2>
       <v-row
           dense
           class="no-gutters justify-start gap-0 max-w-fit"
       >
         <v-col
-            v-for="(account, index) in financialData.accounts"
+            v-for="(account, index) in props.customer.financial_data.accounts"
             :key="account.iban"
             cols="12"
             md="6"
@@ -43,12 +41,13 @@
         </v-col>
       </v-row>
     </v-card>
-
-  </v-container>
 </template>
 
 <script lang="ts" setup>
-import {customer} from '@/data/customer.ts';
+import {Customer} from "@/types/Customer.ts";
+import {ref} from "vue";
+const props = defineProps<{
+  customer: Customer
+}>()
 
-const financialData = customer.financial_data;
 </script>
