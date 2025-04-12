@@ -24,17 +24,26 @@ class RealTimeTranscriber:
         )
 
         self.q = queue.Queue()
+        self.current_speaker = 1
+        self.prev_energy = 0
+        self.speaker_switch_threshold = 3000  # Energy threshold for switching speaker
 
     def audio_callback(self, indata, frames, time, status):
         if status:
             print(status)
         self.q.put(indata.copy())
 
+    def detect_speaker_change(self, energy):
+        if abs(energy - self.prev_energy) > self.speaker_switch_threshold:
+            # Switch speaker
+            self.current_speaker = 2 if self.current_speaker == 1 else 1
+        self.prev_energy = energy
+
     def transcribe_live(self):
         samplerate = 16000
         blocksize = 1024
         duration = 2  # Transcribe every 2 seconds
-        rms_threshold = 150  # Detect speech if RMS is above this
+        rms_threshold = 150  # Silence detection threshold
 
         print("Start speaking... (Press CTRL+C to stop)")
 
@@ -68,6 +77,8 @@ class RealTimeTranscriber:
                             buffer = np.empty((0, 1), dtype=np.float32)
                             continue
 
+                        self.detect_speaker_change(audio_segment.rms)
+
                         audio_segment.export(temp_filename, format="wav")
 
                         with open(temp_filename, "rb") as audio_file:
@@ -78,14 +89,16 @@ class RealTimeTranscriber:
 
                         text = result.text.strip()
                         if text:
-                            print(f"YOU SAID: {text}\n")
-                            live_transcription += text + " "
+                            speaker_tag = f"[Speaker {self.current_speaker}]"
+                            print(f"{speaker_tag}: {text}\n")
+                            live_transcription += f"{speaker_tag} {text} "
 
                         os.remove(temp_filename)
                         buffer = np.empty((0, 1), dtype=np.float32)
 
             except KeyboardInterrupt:
                 print("\nStopping transcription...")
+                # Optionally save transcript
                 # with open("live_transcription.txt", "w", encoding="utf-8") as f:
                 #     f.write(live_transcription)
                 # print("Your full transcription is saved in 'live_transcription.txt'")
