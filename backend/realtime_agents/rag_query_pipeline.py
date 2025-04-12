@@ -1,7 +1,6 @@
 from sentence_transformers import SentenceTransformer
 import chromadb
 import ollama
-from typing import List
 
 MODEL_NAME = 'all-MiniLM-L6-v2'
 CHROMA_COLLECTION_NAME = "mongo_rag"
