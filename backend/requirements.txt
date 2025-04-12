@@ -4,3 +4,6 @@ gunicorn==23.0.0
 pymongo==4.11
 torch==2.6.0
 transformers==4.51.2
+sentence-transformers==4.0.2
+chromadb==1.0.4
+ollama==0.4.7
