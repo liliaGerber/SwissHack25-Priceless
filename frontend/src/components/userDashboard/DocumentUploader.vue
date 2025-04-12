@@ -51,7 +51,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import {ref} from 'vue'
 import {Customer} from "@/types/Customer.ts";
 
 const uploadedFiles = ref<File[] | null>(null)
@@ -61,13 +61,14 @@ const props = defineProps<{
   customer: Customer
 }>()
 
-function handleUpload(files: File[] | null) {
-  if (!files) return
-  // Add files without replacing existing
-  const existingNames = new Set(fileList.value.map(f => f.name))
-  const newFiles = files.filter(file => !existingNames.has(file.name))
-  fileList.value.push(...newFiles)
-  uploadedFiles.value = null // reset input
+function handleUpload(files: File[] | File) {
+  const fileArray = Array.isArray(files) ? files : [files];
+
+  const existingNames = new Set(fileList.value.map(f => f.name));
+  const newFiles = fileArray.filter(file => !existingNames.has(file.name));
+  fileList.value.push(...newFiles);
+
+  uploadedFiles.value = null;
 }
 
 function removeFile(index: number) {
