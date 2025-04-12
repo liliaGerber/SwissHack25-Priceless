@@ -10,6 +10,7 @@
       <!-- Right Column -->
       <v-col cols="12" md="8">
         <FinancialStats />
+        <CreditScoreCard/>
         <BehaviorOverview class="mt-6" />
 
         <v-row class="mt-6" dense>
@@ -41,4 +42,5 @@ import UserInfo from './UserInfo.vue'
 import FinancialStats from './FinancialStats.vue'
 import BehaviorOverview from './BehaviorOverview.vue'
 import DocumentUploader from './DocumentUploader.vue'
+import CreditScoreCard from './CreditScoreCard.vue'
 </script>

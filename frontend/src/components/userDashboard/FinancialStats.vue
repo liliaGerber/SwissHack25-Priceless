@@ -3,7 +3,7 @@
 
     <!-- Accounts -->
     <v-card flat class="bg-background p-0 rounded-xl overflow-hidden">
-      <h2 class="text-lg font-semibold px-6 pt-6 pb-4">Bank Accounts</h2>
+      <h2 class="text-lg font-semibold px-6 pt-6 pb-2">Bank Accounts</h2>
       <v-row
           dense
           class="no-gutters justify-start gap-0 max-w-fit"
