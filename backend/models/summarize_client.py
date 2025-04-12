@@ -1,7 +1,7 @@
 from transformers import pipeline
 from pymongo import MongoClient
 import textwrap
-import os  # Import os for potential environment variable usage
+import os 
 from abc import ABC, abstractmethod
 
 
@@ -73,7 +73,7 @@ class ClientSummarizer:
         self,
         summarizer_type="HuggingFace",
         mongo_uri="mongodb://localhost:27017/",
-        db_name="raiffeisen",
+        db_name="raiffeisen_enhanced",
     ):
         """
         Initializes the summarizer pipeline and MongoDB connection details.
@@ -119,8 +119,7 @@ class ClientSummarizer:
             return None, None, None  # Return None if DB connection failed
 
         customers_collection = self._db["customers"]
-        summaries_collection = self._db["summaries"]  # Assuming discussions are here
-
+        
         # Find the client by name (adjust "name" field if different in your schema)
         customer_data = customers_collection.find_one({"name": client_name_to_find})
 
@@ -135,11 +134,9 @@ class ClientSummarizer:
         # Find previous discussions linked by client_id (adjust "client_id" field if different)
         # Also assume discussions are stored in a field named "summary" within the summaries collection
         discussion_docs = list(
-            summaries_collection.find({"client_id": client_id}).sort("date", 1)
-        )  # Sort by date ascending
-        previous_discussions = [
-            doc.get("summary", "Summary not available") for doc in discussion_docs
-        ]
+            customer_data.get("summaries", [])
+        )  
+        previous_discussions = discussion_docs
 
         print(
             f"Found client '{client_name}' ({client_job}) with {len(previous_discussions)} discussions in DB."
@@ -151,18 +148,13 @@ class ClientSummarizer:
         if not previous_discussions:
             discussion_points = "- No previous discussions found."
         else:
-            discussion_points = "\n".join(
-                [f"- {note}" for note in previous_discussions]
+            discussion_points = " ".join(
+                [note["note"] for note in previous_discussions]
             )
+            print(discussion_points)
 
         text_to_summarize = f"""
-Client Name: {client_name}
-Client Job: {client_job}
-
-Summary of Previous Financial Advisory Discussions:
 {discussion_points}
-
-Generate a concise summary of the key financial topics, goals, and actions discussed with this client across all sessions. Focus on financial goals, strategies implemented, and outstanding items.
 """
         return text_to_summarize
 
@@ -216,7 +208,7 @@ Generate a concise summary of the key financial topics, goals, and actions discu
             client_name_to_find
         )
         if client_name is None:
-            return None  # Client not found or DB error
+            return None  
 
         return self.summarize_client_from_data(
             client_name, client_job, previous_discussions
@@ -225,42 +217,15 @@ Generate a concise summary of the key financial topics, goals, and actions discu
 
 # --- Example Usage ---
 if __name__ == "__main__":
-    # --- Option 1: Summarize hardcoded data (like original script) ---
-    print("--- Example 1: Summarizing Hardcoded Data ---")
-    hardcoded_client_name = "Bob The Builder"
-    hardcoded_client_job = "Construction Manager"
-    hardcoded_discussions = [
-        "2024-01-10: Initial consultation. Discussed Bob's goal of retiring in 15 years. Reviewed current assets (modest savings, small 401k). Concerned about market volatility.",
-        "2024-03-22: Follow-up on risk tolerance. Bob prefers a balanced approach. Agreed on a diversified portfolio strategy (60% equity, 40% bonds). Started funding a Roth IRA.",
-        "2024-05-15: Reviewed Q1 performance. Discussed increasing 401k contribution from 5% to 8%. Bob asked about college savings options for his child.",
-        "2024-06-30: Explored 529 plan options. Bob decided to open a 529 plan and contribute monthly. Confirmed the 401k contribution increase was implemented.",
-    ]
 
-    try:
-        summarizer_instance = ClientSummarizer()  # Use default model and DB settings
-        summary1 = summarizer_instance.summarize_client_from_data(
-            hardcoded_client_name, hardcoded_client_job, hardcoded_discussions
-        )
-
-        if summary1:
-            print("\n--- Generated Client Summary (Hardcoded Data) ---")
-            print(textwrap.fill(summary1, width=80))
-            print("-" * 40)
-        else:
-            print("Failed to generate summary for hardcoded data.")
-
-    except Exception as e:
-        print(f"Error initializing or using summarizer for hardcoded data: {e}")
-
+    summarizer_instance = ClientSummarizer()  
+ 
     # --- Option 2: Summarize data fetched from MongoDB ---
     print("\n\n--- Example 2: Summarizing Data from MongoDB ---")
-    # !! IMPORTANT !!: Replace "Alice Wonderland" with a client name ACTUALLY IN YOUR DATABASE
     client_name_in_db = (
-        "Customer 2"  # <--- CHANGE THIS to a name in your 'customers' collection
+        "Ryan Zimmermann" 
     )
 
-    # Re-use the instance or create a new one if needed
-    # summarizer_instance = ClientSummarizer()
     summary2 = summarizer_instance.summarize_client_from_db(client_name_in_db)
 
     if summary2:
