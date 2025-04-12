@@ -1,26 +1,49 @@
+import ollama
+from bson import ObjectId
 from pymongo import MongoClient
-from sentence_transformers import SentenceTransformer
-import chromadb
-from chromadb.config import Settings
 
-# Connect to MongoDB
-client = MongoClient("mongodb://localhost:27017")
-collection = client["your_db"]["your_collection"]
+# === Config ===
+MODEL_NAME = 'all-MiniLM-L6-v2'
+LLM_MODEL = 'gemma3:1b'
+MONGO_URI = "mongodb://localhost:27017"
+DB_NAME = "raiffeisen"
+COLLECTION_NAME = "customers"
 
-# Load documents
-documents = []
-for doc in collection.find():
-    text = f"Title: {doc.get('title', '')}\nContent: {doc.get('content', '')}"
-    documents.append(text)
 
-# Load embedding model
-model = SentenceTransformer('all-MiniLM-L6-v2')
 
-# Setup ChromaDB
-chroma_client = chromadb.Client(Settings(persist_directory="db"))
-collection = chroma_client.create_collection(name="mongo_rag")
+def get_context(customer_id: str):
+    documents = []
+    mongo_collection = MongoClient(MONGO_URI)[DB_NAME][COLLECTION_NAME]
+    print("Customerid: ", customer_id)
+    print("Find something: ", list(mongo_collection.find({}, {"_id": 1})))
+    for doc in mongo_collection.find({"_id": ObjectId(customer_id)}):
+        text = "\\n".join(f"{key}: {value}" for key, value in doc.items() if key != "_id")
+        if text.strip():
+            documents.append(text)
+    print("User found: ", documents)
+    if not documents:
+        return "No relevant context found."
 
-# Index documents
-for i, doc in enumerate(documents):
-    embedding = model.encode(doc).tolist()
-    collection.add(documents=[doc], ids=[str(i)], embeddings=[embedding])
+    context = "\n".join(doc[:500] for doc in documents)
+    return context
+
+
+def query_rag(question: str, customer_id: str, top_k: int = 3):
+    context = get_context(customer_id)
+    prompt = (
+        "Answer the question using the context below. "
+        "If the context is not helpful, say 'Not enough information.'\n\n"
+        f"Context:\n{context}\n\n"
+        f"Question: {question}\n\n"
+        "Answer:"
+    )
+    response = ollama.chat(model=LLM_MODEL, messages=[{"role": "user", "content": prompt}])
+    return response['message']['content']
+
+
+if __name__ == "__main__":
+    customer = "67faa98e6fdf05b5f7261303"
+    q = "What can you tell me about the customers?"
+    print("Question: ", q)
+    answer = query_rag(q, customer)
+    print("Answer:\n", answer)

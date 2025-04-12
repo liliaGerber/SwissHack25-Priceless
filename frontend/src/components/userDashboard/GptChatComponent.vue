@@ -64,12 +64,18 @@
   </v-card>
 </template>
 <script lang="ts" setup>
-import { ref, nextTick, onMounted } from 'vue'
-
+import {nextTick, onMounted, ref} from 'vue'
+import {useBasicApiDataStore} from "@/stores/BasicAPIData.ts";
+import {Customer} from "@/types/Customer.ts";
+// Props
+const props = defineProps<{
+  customer: Customer
+}>()
 const message = ref('')
 const isTyping = ref(false)
 const chatLog = ref<{ sender: 'user' | 'gpt'; message: string }[]>([])
 const chatContainer = ref<HTMLElement | null>(null)
+const chatStore = useBasicApiDataStore()
 
 onMounted(() => {
   chatLog.value.push({
@@ -80,22 +86,17 @@ onMounted(() => {
   scrollToBottom()
 })
 
-function sendMessage() {
+async function sendMessage() {
   if (!message.value.trim()) return
 
   const userMessage = message.value.trim()
-  chatLog.value.push({ sender: 'user', message: userMessage })
+  chatLog.value.push({sender: 'user', message: userMessage})
   message.value = ''
-
-  scrollToBottom()
-
   isTyping.value = true
-
-  setTimeout(() => {
-    isTyping.value = false
-    chatLog.value.push({ sender: 'gpt', message: userMessage })
-    scrollToBottom()
-  }, 1000)
+  const response = await chatStore.chatWithBot(userMessage, props.customer.id)
+  chatLog.value.push({sender: 'gpt', message: response})
+  isTyping.value = false
+  scrollToBottom()
 }
 
 function scrollToBottom() {
