@@ -4,7 +4,7 @@ FROM python:3.13-slim AS dev
 WORKDIR /app
 
 # Install dependencies for Flask hot reloading
-RUN apt-get update && apt-get install -y gcc libffi-dev inotify-tools && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y gcc libffi-dev inotify-tools ffmpeg && rm -rf /var/lib/apt/lists/*
 
 # Set environment variables for development
 ENV FLASK_APP=app.py
