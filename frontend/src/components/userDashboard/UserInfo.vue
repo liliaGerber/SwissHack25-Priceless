@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts" setup>
-import {customer} from "@/data/customer.ts";
+import {customer} from '@/data/customer.ts';
 </script>
 <style scoped>
 

@@ -1,16 +1,31 @@
-# VUE
+# VUE BUILD
 FROM node:23-alpine AS builder
+
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
+
+# Install pnpm globally
+RUN npm install -g pnpm
+
+# Install dependencies
+COPY pnpm-lock.yaml ./
+COPY package.json ./
+RUN pnpm install
+
+# Copy the source code and build
 COPY . .
-RUN npm run build
+RUN pnpm build
 
 # NGINX
 FROM nginx:1.26-alpine
+
 WORKDIR /usr/share/nginx/html
+
 RUN rm -rf ./*
+
 COPY --from=builder /app/dist .
+
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 EXPOSE 8080
+
 CMD ["nginx", "-g", "daemon off;"]
