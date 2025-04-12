@@ -2,7 +2,7 @@ import pandas as pd
 import yake
 from pymongo import MongoClient
 
-df_raw = pd.read_csv("raiffeisen_full_text.csv")
+df_raw = pd.read_csv("../data/raiffeisen_full_text.csv")
 
 # Initialize YAKE for German
 kw_extractor = yake.KeywordExtractor(lan="de", n=3, top=5)

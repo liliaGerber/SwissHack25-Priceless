@@ -59,7 +59,7 @@ def parse_docx(file_path):
 
 
 if __name__ == "__main__":
-    file_path = "../../data/raiffeisenprodukte_final.docx"
+    file_path = "../data/raiffeisenprodukte_final.docx"
 
     # Step 1 — Extract Raw Text
     df_raw = parse_docx(file_path)
