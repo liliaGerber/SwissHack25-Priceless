@@ -8,19 +8,16 @@
       </v-col>
 
       <!-- Right Column -->
-      <v-col cols="12" md="8">
+      <v-col cols="12" md="4">
         <BankAccountsCard/>
         <CreditScoreCard/>
         <BehaviorOverview class="mt-6"/>
         <CustomerSummary/>
-
-          <v-card class="p-6 bg-white rounded-xl shadow-sm">
-            <h2 class="text-xl font-semibold text-gray-800 mb-2">Chatbot Assistant</h2>
-            <div class="text-gray-500 text-sm">
-              Chatbot functionality coming soon...
-            </div>
-          </v-card>
+        <gpt-chat-component/>
     </v-col>
+      <v-col cols="12" md="4">
+        <gpt-chat-component/>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -32,4 +29,5 @@ import BehaviorOverview from './BehaviorOverview.vue'
 import DocumentUploader from './DocumentUploader.vue'
 import CreditScoreCard from './CreditScoreCard.vue'
 import CustomerSummary from "./CustomerSummary.vue";
+import GptChatComponent from "@/components/userDashboard/GptChatComponent.vue";
 </script>
