@@ -21,6 +21,8 @@ services:
       - ./backend:/app
     environment:
       - PRINT_VERBOSE=True
+    env_file:
+      - backend/.env
 
   database:
     image: mongo:latest
