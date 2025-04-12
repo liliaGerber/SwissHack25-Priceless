@@ -1,9 +1,10 @@
 import requests
 import os
 from dotenv import dotenv_values
+from openai import AzureOpenAI
 
 class Transcriber:
-    def __init__(self, api_key: str= None, endpoint: str = None, deployment_id: str = "whisper"):
+    def __init__(self, api_key: str= None, endpoint: str = None, deployment_id: str = "whisper-1"):
         self.api_key = dotenv_values().get("api_key", api_key)
         if not self.api_key:
             self.api_key = os.getenv("api_key")
@@ -13,7 +14,12 @@ class Transcriber:
         print(f"Using endpoint: {self.endpoint}")
         print(f"Using api_key: {self.api_key}")
         self.deployment_id = deployment_id
-        self.url = f"{self.endpoint}openai/deployments/{self.deployment_id}/audio/transcriptions?api-version=2024-02-01"
+        self.client = AzureOpenAI(
+            api_key=self.api_key,
+            azure_endpoint=self.endpoint,
+            api_version="2024-10-21",
+        )
+        
     def divide_into_components(self, file_to_path: str, total_chunks: int= 1):
         """
         Divides the audio file into components for processing.
@@ -29,10 +35,6 @@ class Transcriber:
         """
         Transcribes an audio file using Azure OpenAI Whisper API.
         """
-        headers = {
-            "api-key": self.api_key,
-        }
-
         audio_data = self.divide_into_components(audio_file_path)
         if os.path.exists(audio_file_path):
             print(f"Audio file found: {audio_file_path}")
@@ -40,18 +42,11 @@ class Transcriber:
             print(f"Audio file not found: {audio_file_path}")
             return None
         transcription_results = []
-        with open(audio_file_path, 'rb') as f:
-            files = {
-                'file': (os.path.basename(audio_file_path), f),
-                'language': (None, 'en-US'),
-                'model': (None, 'whisper-1'),
-            }
-
-            response = requests.post(self.url, headers=headers, files=files)
-        print("Okayy")
-        if response.status_code != 200:
-            print(response.text)
-            response.raise_for_status()
+        result = self.client.audio.transcriptions.create(
+            model=self.deployment_id,
+            file= open(audio_file_path, "rb"),
+        )
+        breakpoint()
         with open("transcription.txt", "w") as f:
             for result in transcription_results:
                 f.write(result["text"] + "\n")

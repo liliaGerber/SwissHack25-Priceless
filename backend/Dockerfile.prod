@@ -24,7 +24,7 @@ COPY --from=builder /app /app
 
 # Ensure Gunicorn is installed in the final image
 RUN pip3 install --no-cache-dir -r requirements.txt
-
+RUN apt-get update && apt-get install -y ffmpeg
 # Create a non-root user for security
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 USER appuser
