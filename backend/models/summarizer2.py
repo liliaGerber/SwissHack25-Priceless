@@ -2,18 +2,16 @@ import os
 from openai import AzureOpenAI
 from dotenv import load_dotenv, dotenv_values
 
-# Load environment variables from .env file
 load_dotenv()
 
 DEFAULT_DEPLOYMENT_NAME = "gpt-4o-mini" 
-API_VERSION = "2024-02-01" # Or your preferred API version
+API_VERSION = "2024-02-01" 
 
 class Summarizer:
     def __init__(self, deployment_name: str = None):
         self.api_key = os.getenv("AZURE_OPENAI_API_KEY") or dotenv_values().get("AZURE_OPENAI_API_KEY")
         self.endpoint = os.getenv("AZURE_OPENAI_ENDPOINT") or dotenv_values().get("AZURE_OPENAI_ENDPOINT")
         
-        # Use provided deployment name, environment variable, or default
         self.deployment_name = deployment_name or \
                                os.getenv("AZURE_OPENAI_DEPLOYMENT_SUMMARIZER") or \
                                DEFAULT_DEPLOYMENT_NAME
@@ -48,8 +46,8 @@ class Summarizer:
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt},
                 ],
-                temperature=0.5, # Adjust for more or less creativity
-                max_tokens=250, # Adjust based on desired summary length
+                temperature=0.5, 
+                max_tokens=250,
             )
             
             summary = response.choices[0].message.content.strip()
