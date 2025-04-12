@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 
 export const useMainInformationStore = defineStore('main', {
     state: () => ({
-        companyName: "Sharknado",
+        companyName: "Priceless",
         companySlogan: "Ich will nicht mehr, ich kann nicht mehr, ich halte das alles nicht mehr aus"
     }),
     getters: {

@@ -18,7 +18,7 @@ const mainStore = useMainInformationStore();
 
 <template>
   <!--  Desktop View-->
-  <v-app-bar v-if="!screenSizes.isMobile.value" class="justify-evenly" elevation="0">
+  <v-app-bar v-if="!screenSizes.isMobile.value" class="justify-evenly bg-secondary-background" elevation="0">
     <v-app-bar-title class="max-w-fit">{{ mainStore.companyNameGetter }}</v-app-bar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items >

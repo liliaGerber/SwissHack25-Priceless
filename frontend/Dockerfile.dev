@@ -8,10 +8,10 @@ WORKDIR /app
 RUN npm install -g pnpm
 
 # Copy and install dependencies
-COPY pnpm-lock.yaml ./
+COPY package.json ./
 COPY package.json ./
 RUN pnpm install
-
+COPY pnpm-lock.yaml ./
 # Copy the rest of the files
 COPY . .
 
