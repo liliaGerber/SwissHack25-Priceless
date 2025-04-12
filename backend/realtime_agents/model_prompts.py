@@ -15,9 +15,8 @@ def get_context(customer_id: str):
     documents = []
     mongo_collection = MongoClient(MONGO_URI)[DB_NAME][COLLECTION_NAME]
     print("Customerid: ", customer_id)
-    print("Find something: ", list(mongo_collection.find({}, {"_id": 1})))
-    for doc in mongo_collection.find({"_id": ObjectId(customer_id)}):
-        text = "\\n".join(f"{key}: {value}" for key, value in doc.items() if key != "_id")
+    for doc in mongo_collection.find({"id": customer_id}):
+        text = "\\n".join(f"{key}: {value}" for key, value in doc.items() if key != "id")
         if text.strip():
             documents.append(text)
     print("User found: ", documents)

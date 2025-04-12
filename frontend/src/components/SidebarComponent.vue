@@ -21,11 +21,11 @@
 
 <script lang="ts" setup>
 import type { Customer } from '@/types/Customer'
-import { defineEmits, defineProps } from 'vue'
+import { defineEmits, onMounted, ref } from 'vue'
+import { useBasicApiDataStore } from '@/stores/BasicAPIData.ts'
 
-const props = defineProps<{
-  customers: Customer[]
-}>()
+const customerStore = useBasicApiDataStore()
+const customers = ref<Customer[]>([])
 
 const emit = defineEmits<{
   (e: 'select', customer: Customer): void
@@ -34,4 +34,9 @@ const emit = defineEmits<{
 function selectCustomer(customer: Customer) {
   emit('select', customer)
 }
+
+onMounted(async () => {
+  await customerStore.getAllCustomers()
+  customers.value = customerStore.customers
+})
 </script>
