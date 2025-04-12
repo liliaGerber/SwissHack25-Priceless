@@ -90,9 +90,10 @@ class ClientSummarizer:
 
 if __name__ == "__main__":
     summarizer_instance = ClientSummarizer()  # Use default model and DB settings
-    client_name_in_db = summarizer_instance._db["customers"].find_one(
-        {}, {"name": 1}
-    )["name"]  # Fetch a random client name from the DB
+    # client_name_in_db = summarizer_instance._db["customers"].find_one(
+    #     {}, {"name": 1}
+    # )["name"]  # Fetch a random client name from the DB
+    client_name_in_db = "Anna Rahmen" # Use specific client name
 
     summary = summarizer_instance.summarize_client_from_db(client_name_in_db)
 
