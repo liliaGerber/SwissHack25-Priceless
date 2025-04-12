@@ -19,6 +19,8 @@ services:
       - database
     volumes:
       - ./backend:/app
+    environment:
+      - PRINT_VERBOSE=False
 
   database:
     image: mongo:latest
