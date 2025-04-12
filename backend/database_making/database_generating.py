@@ -79,4 +79,4 @@ if __name__ == "__main__":
     conn = sqlite3.connect("raiffeisen.db")
     df_keywords.to_sql("products", conn, if_exists="replace", index=False)
 
-    print("✓ Finished successfully: Text extracted, Keywords written into CSV + DB!")
+    print("Finished successfully: Text extracted, Keywords written into CSV + DB!")
