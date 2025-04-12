@@ -1,22 +1,22 @@
 # syntax=docker/dockerfile:1.4
 
-# Use a Node image for development
 FROM node:23-alpine AS dev
 
 WORKDIR /app
 
-# Install dependencies
-COPY package*.json ./
-RUN npm install
+# Install pnpm via npm
+RUN npm install -g pnpm
 
-# Copy the project files
+# Copy and install dependencies
+COPY package.json ./
+COPY package.json ./
+RUN pnpm install
+COPY pnpm-lock.yaml ./
+# Copy the rest of the files
 COPY . .
 
-# Expose the Vite development server port
 EXPOSE 5173
 
-# Set Vite environment variables for development
 ENV NODE_ENV=development
 
-# Run Vite with hot reloading
-CMD ["npm", "run", "dev", "--", "--host"]
+CMD ["pnpm", "dev", "--", "--host"]

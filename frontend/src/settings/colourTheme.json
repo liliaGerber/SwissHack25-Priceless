@@ -1,5 +1,6 @@
 {
-    "background": "#FFFFFF",
+    "background": "#17133B",
+    "secondary-background": "#2A2852",
     "surface": "#FFFFFF",
     "primary": "#6200EE",
     "primary-darken-1": "#3700B3",
