@@ -1,5 +1,5 @@
 <template>
-  <v-card class="bg-secondary-background text-white rounded-xl px-3 py-6 max-w-fit">
+  <v-card class="bg-secondary-background text-white rounded-xl px-3 py-6 w-full">
     <div class="flex items-center gap-4 mb-2 px-3">
       <v-avatar size="90">
         <img :alt="customer.name" :src="customer.avatar"/>
@@ -50,7 +50,11 @@
 </template>
 
 <script lang="ts" setup>
-import {customer} from '@/data/customer.ts';
+import {Customer} from "@/types/Customer.ts";
+// Props
+const props = defineProps<{
+  customer: Customer
+}>()
 </script>
 <style scoped>
 

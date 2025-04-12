@@ -1,7 +1,7 @@
 <template>
   <v-card
-      flat
       class="bg-background text-white px-6 py-5 rounded-xl w-full max-w-fit"
+      flat
   >
     <!-- Title Row -->
     <div class="flex items-center gap-2 mb-2">
@@ -16,32 +16,35 @@
       <div class="flex flex-wrap md:flex-nowrap gap-x-8 gap-y-4">
         <div class="flex gap-2 items-center">
           <p class="text-gray-400 font-bold">App Logins (30d):</p>
-          <p class="text-white font-medium">{{ behavior.appLogins }}</p>
+          <p class="text-white font-medium">{{ props.customer.behavior.appLogins }}</p>
         </div>
         <div class="flex gap-2 items-center">
           <p class="text-gray-400 font-bold">Transactions (30d):</p>
-          <p class="text-white font-medium">{{ behavior.transactions }}</p>
+          <p class="text-white font-medium">{{ props.customer.behavior.transactions }}</p>
         </div>
       </div>
 
       <!-- Engagement Row -->
       <div>
         <v-progress-linear
-            :model-value="behavior.engagement"
+            :model-value="props.customer.behavior.engagement"
             color="cyan"
             height="10"
             rounded
         />
         <p class="text-sm text-gray-400 mt-2">
-          Engagement: <span class="text-white font-medium">{{ behavior.engagement }}%</span>
+          Engagement: <span class="text-white font-medium">{{ props.customer.behavior.engagement }}%</span>
         </p>
       </div>
     </div>
   </v-card>
 </template>
 
-<script setup lang="ts">
-import { customer } from '@/data/customer.ts'
+<script lang="ts" setup>
+import {Customer} from "@/types/Customer.ts";
 
-const behavior = customer.financial_data.behavior ?? customer.behavior // fallback if needed
+const props = defineProps<{
+  customer: Customer
+}>()
+
 </script>

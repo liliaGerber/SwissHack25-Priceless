@@ -10,8 +10,8 @@ const drawer = ref(false);
 
 const links = [
   {name: "Home", path: "/"},
-  {name: "Team", path: "/team"},
-  {name: "Contact", path: "/contact"},
+  {name: "My Customers", path: "/team"},
+  {name: "History", path: "/contact"},
 ];
 const mainStore = useMainInformationStore();
 </script>

@@ -1,7 +1,7 @@
 <template>
   <v-card
       flat
-      class="bg-background text-white px-6 py-5 rounded-xl w-full max-w-fit min-w-[300px]"
+      class="bg-background text-white rounded-xl w-full min-w-[300px]"
   >
     <!-- Title Row -->
     <div class="flex items-center gap-2 mb-2">
@@ -52,9 +52,14 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import {Customer} from "@/types/Customer.ts";
 
 const uploadedFiles = ref<File[] | null>(null)
 const fileList = ref<File[]>([])
+
+const props = defineProps<{
+  customer: Customer
+}>()
 
 function handleUpload(files: File[] | null) {
   if (!files) return

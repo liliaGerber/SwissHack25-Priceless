@@ -1,7 +1,7 @@
 <template>
   <v-card
       flat
-      class="bg-background text-white px-6 py-5 rounded-xl w-[600px] h-[800px] flex flex-col"
+      class="bg-background text-white px-6 rounded-xl w-full h-full flex flex-col"
   >
     <!-- Title -->
     <div class="flex items-center gap-2 mb-2">
@@ -13,7 +13,7 @@
         class="bg-secondary-background p-4 rounded-xl text-sm overflow-y-auto flex-1 space-y-3"
     >
       <!-- Content flipped: input stays locked at bottom -->
-      <div class="flex flex-col-reverse flex-1 overflow-hidden gap-4 h-[400px]">
+      <div class="flex flex-col-reverse flex-1 overflow-hidden gap-4 h-[80vh]">
         <!-- Input stays at bottom visually -->
         <div class="flex items-center gap-2 mt-4">
           <v-text-field
