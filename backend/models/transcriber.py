@@ -4,7 +4,7 @@ from dotenv import dotenv_values
 from openai import AzureOpenAI
 
 class Transcriber:
-    def __init__(self, api_key: str= None, endpoint: str = None, deployment_id: str = "whisper-1"):
+    def __init__(self, api_key: str= None, endpoint: str = None, deployment_id: str = "whisper"):
         self.api_key = dotenv_values().get("api_key", api_key)
         if not self.api_key:
             self.api_key = os.getenv("api_key")
@@ -17,7 +17,7 @@ class Transcriber:
         self.client = AzureOpenAI(
             api_key=self.api_key,
             azure_endpoint=self.endpoint,
-            api_version="2024-10-21",
+            api_version="2024-05-01-preview",
         )
         
     def divide_into_components(self, file_to_path: str, total_chunks: int= 1):
