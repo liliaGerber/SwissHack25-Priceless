@@ -6,7 +6,10 @@ import numpy as np
 from dotenv import dotenv_values
 from openai import AzureOpenAI
 from pydub import AudioSegment
-import librosa  # Add librosa import
+import librosa
+import copy
+
+from agents.agent_executer import AgentExec
 
 
 class RealTimeTranscriber:
@@ -14,7 +17,7 @@ class RealTimeTranscriber:
         config = dotenv_values()
         self.api_key = api_key or config.get("api_key") or os.getenv("api_key")
         self.endpoint = endpoint or config.get("endpoint") or os.getenv("endpoint")
-
+        self.agent = AgentExec()
         print(f"Using endpoint: {self.endpoint}")
 
         self.deployment_id = deployment_id
@@ -27,8 +30,13 @@ class RealTimeTranscriber:
         self.q = queue.Queue()
         self.max_speakers = 2
         self.speaker_profiles = {1: [], 2: []}
-        self.current_speaker = 1  
+        self.current_speaker = 1
         self.pitch_threshold = 30
+
+        self.speaker_segments = {1: [], 2: []}
+        self.current_segment_text = ""
+        self.silence_duration = 0
+        self.silence_threshold_secs = 1.5
 
     def audio_callback(self, indata, frames, time, status):
         if status:
@@ -36,59 +44,49 @@ class RealTimeTranscriber:
         # Put raw float32 data into the queue
         self.q.put(indata.copy())
 
+    def initialize_agent_snippet(self):
+        self.agent.execute("67f9ebbe72b23bd97cd9ada3", self.current_segment_text)
+
     def get_pitch(self, audio_data, samplerate):
-        """Extracts the median pitch from an audio chunk using librosa.pyin."""
         try:
-            # Ensure audio_data is float and mono
             if audio_data.dtype != np.float32:
-                 audio_data = audio_data.astype(np.float32)
-                 # Normalize if it was int16 previously, check range first if needed
-                 if np.max(np.abs(audio_data)) > 1.0:
-                     audio_data = audio_data / 32767.0
+                audio_data = audio_data.astype(np.float32)
+                if np.max(np.abs(audio_data)) > 1.0:
+                    audio_data = audio_data / 32767.0
 
             if audio_data.ndim > 1:
-                audio_data = audio_data.flatten() # Make it 1D, assuming mono input stream
+                audio_data = audio_data.flatten()
 
-            f0, voiced_flag, voiced_probs = librosa.pyin(audio_data,
-                                                         fmin=librosa.note_to_hz('C2'),
-                                                         fmax=librosa.note_to_hz('C7'),
-                                                         sr=samplerate)
-            # Get pitch only for voiced segments
+            f0, voiced_flag, voiced_probs = librosa.pyin(
+                audio_data, fmin=librosa.note_to_hz('C2'), fmax=librosa.note_to_hz('C7'), sr=samplerate
+            )
+
             voiced_f0 = f0[voiced_flag]
             if len(voiced_f0) > 0:
-                return np.median(voiced_f0) # Use median pitch of voiced segments
+                return np.median(voiced_f0)
         except Exception as e:
             print(f"Error calculating pitch: {e}")
-        return None # No voiced segments detected or error occurred
+        return None
 
     def identify_speaker(self, current_pitch):
-        """Identifies speaker (1 or 2) based on pitch history."""
         if current_pitch is None:
-             return self.current_speaker # Keep current speaker if no pitch
+            return self.current_speaker
 
-        # --- Initial Speaker Assignment --- 
         if not self.speaker_profiles[1]:
             self.speaker_profiles[1].append(current_pitch)
             self.current_speaker = 1
-            print(f"*** Assigning first pitch {current_pitch:.2f} Hz to Speaker 1 ***")
             return self.current_speaker
 
-        # If Speaker 2 has no profile yet
         if not self.speaker_profiles[2]:
             mean_pitch_sp1 = np.mean(self.speaker_profiles[1])
-            # If current pitch is different enough from Speaker 1, assign to Speaker 2
             if abs(current_pitch - mean_pitch_sp1) > self.pitch_threshold:
                 self.speaker_profiles[2].append(current_pitch)
                 self.current_speaker = 2
-                print(f"*** Assigning new pitch {current_pitch:.2f} Hz to Speaker 2 (distinct from Sp1 mean {mean_pitch_sp1:.2f} Hz) ***")
             else:
-                # Otherwise, still Speaker 1
                 self.speaker_profiles[1].append(current_pitch)
                 self.current_speaker = 1
-                # print(f"Assigning pitch {current_pitch:.2f} Hz to Speaker 1 (similar to mean {mean_pitch_sp1:.2f} Hz)")
             return self.current_speaker
 
-        # --- Both speakers have profiles, find the closest match --- 
         mean_pitch_sp1 = np.mean(self.speaker_profiles[1])
         mean_pitch_sp2 = np.mean(self.speaker_profiles[2])
 
@@ -96,24 +94,19 @@ class RealTimeTranscriber:
         diff2 = abs(current_pitch - mean_pitch_sp2)
 
         if diff1 <= diff2:
-            # Closer to Speaker 1
             self.current_speaker = 1
             self.speaker_profiles[1].append(current_pitch)
         else:
-            # Closer to Speaker 2
             self.current_speaker = 2
             self.speaker_profiles[2].append(current_pitch)
-            # Optional: Limit profile history size
-            # if len(self.speaker_profiles[2]) > 20: self.speaker_profiles[2].pop(0)
 
-        # print(f"Pitch {current_pitch:.2f} Hz -> Speaker {self.current_speaker} (Means: Sp1={mean_pitch_sp1:.2f}, Sp2={mean_pitch_sp2:.2f})")
         return self.current_speaker
 
     def transcribe_live(self):
         samplerate = 16000
-        blocksize = 1024 
-        duration = 2  # Process audio every 2 seconds
-        rms_threshold = 0.004 # Silence detection threshold for float32 data (-40 dBFS)
+        blocksize = 1024
+        duration = 2
+        rms_threshold = 0.006
 
         print("Start speaking... (Press CTRL+C to stop)")
 
@@ -127,7 +120,6 @@ class RealTimeTranscriber:
 
         with stream:
             buffer = np.empty((0, 1), dtype=np.float32)
-            live_transcription = ""
 
             try:
                 while True:
@@ -135,18 +127,25 @@ class RealTimeTranscriber:
                     buffer = np.concatenate((buffer, audio_chunk))
 
                     if len(buffer) >= samplerate * duration:
-                        current_buffer_segment = buffer[:samplerate * duration] # Process fixed duration
-                        buffer = buffer[samplerate * duration:] # Keep remainder for next chunk
+                        current_buffer_segment = buffer[:samplerate * duration]
+                        buffer = buffer[samplerate * duration:]
 
-                        # --- Silence Detection ---
-                        # Calculate RMS on the float32 data directly
-                        rms_val = np.sqrt(np.mean(current_buffer_segment**2))
+                        rms_val = np.sqrt(np.mean(current_buffer_segment ** 2))
+
                         if rms_val < rms_threshold:
-                            print(f"...silence detected (RMS: {rms_val:.4f}), skipping...")
-                            continue # Skip processing this silent segment
+                            self.silence_duration += duration
+                            if self.silence_duration >= self.silence_threshold_secs:
+                                if self.current_segment_text.strip():
+                                    print(f"=== Speaker {self.current_speaker} Finished ===")
+                                    self.speaker_segments[self.current_speaker].append(self.current_segment_text.strip())
+                                    self.initialize_agent_snippet()
+                                    self.current_segment_text = ""
+                                continue
+                        else:
+                            self.silence_duration = 0
 
-                        # --- Pitch Analysis & Speaker ID ---
                         current_pitch = self.get_pitch(current_buffer_segment, samplerate)
+                        last_speaker_id = copy.deepcopy(self.current_speaker)
                         speaker_id = self.identify_speaker(current_pitch)
                         pitch_str = f"{current_pitch:.2f} Hz" if current_pitch else "N/A"
 
@@ -157,7 +156,6 @@ class RealTimeTranscriber:
                         )
                         audio_segment.export(temp_filename, format="wav")
 
-                        # --- Transcription ---
                         try:
                             with open(temp_filename, "rb") as audio_file:
                                 result = self.client.audio.transcriptions.create(
@@ -170,32 +168,33 @@ class RealTimeTranscriber:
                             print(f"Error during transcription API call: {e}")
                             text = ""
                         finally:
-                             # Ensure temp file is always removed
-                             if os.path.exists(temp_filename):
-                                 os.remove(temp_filename)
-
+                            if os.path.exists(temp_filename):
+                                os.remove(temp_filename)
 
                         if text:
-                            speaker_tag = f"[Speaker {speaker_id}]"
-                            print(f"{speaker_tag} (Pitch: {pitch_str}): {text}")
-                            live_transcription += f"{speaker_tag} {text} "
-                        else:
-                            # Keep buffer if transcription failed? Or just proceed? Currently proceeds.
-                            print(f"[Speaker {speaker_id}] (Pitch: {pitch_str}): --- (Transcription failed or empty) ---")
+                            if last_speaker_id != self.current_speaker:
+                                if self.current_segment_text.strip():
+                                    print(f"=== Speaker {last_speaker_id} Finished ===")
+                                    self.speaker_segments[last_speaker_id].append(self.current_segment_text.strip())
+                                    self.initialize_agent_snippet()
+                                    self.current_segment_text = ""
+                            self.current_segment_text += " " + text
 
+                            print(f"[Speaker {speaker_id}] (Pitch: {pitch_str}) (RMS: {rms_val:.4f}): {text}")
 
             except KeyboardInterrupt:
                 print("\nStopping transcription...")
-                # Optionally save transcript
-                # timestamp = time.strftime("%Y%m%d-%H%M%S")
-                # filename = f"live_transcription_{timestamp}.txt"
-                # with open(filename, "w", encoding="utf-8") as f:
-                #     f.write(live_transcription)
-                # print(f"Your full transcription is saved in '{filename}'")
-            except Exception as e:
-                 print(f"\nAn unexpected error occurred: {e}")
+                if self.current_segment_text.strip():
+                    self.speaker_segments[self.current_speaker].append(self.current_segment_text.strip())
+                    self.initialize_agent_snippet()
+
+                print("\n=== Full Conversation Summary ===")
+                for spk, segments in self.speaker_segments.items():
+                    print(f"\n--- Speaker {spk} ---")
+                    for seg in segments:
+                        print(seg)
+
             finally:
-                # Ensure stream is closed and temp files removed if loop breaks unexpectedly
                 if stream and not stream.closed:
                     stream.stop()
                     stream.close()
@@ -207,3 +206,4 @@ class RealTimeTranscriber:
 if __name__ == "__main__":
     transcriber = RealTimeTranscriber()
     transcriber.transcribe_live()
+    breakpoint()

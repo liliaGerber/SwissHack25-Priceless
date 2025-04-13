@@ -10,8 +10,8 @@ from agents.tools.mortgage_calculator import MortgageCalculatorTool
 from agents.tools.retreiver_tool import LocalFileDisplayTool
 from agents.tools.user_context import UserContextReplyTool
 from langchain.prompts import PromptTemplate
-from utils.db_connector import _get_customer_details_from_db
-from utils.mock_context import context_manager
+from agents.utils.db_connector import _get_customer_details_from_db
+from agents.utils.mock_context import context_manager
 
 
 class AgentExec:
