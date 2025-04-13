@@ -13,11 +13,11 @@ import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from agents.agent_executer_fast import AgentExecFast
 
-
+LANGUAGE="en"
 class RealTimeTranscriber:
     def __init__(self, ws_port=8765):
         self.q = queue.Queue()
-        self.model = WhisperModel("base.en", compute_type="int8", num_workers=2)
+        self.model = WhisperModel("tiny", compute_type="int8", num_workers=2)
         self.max_speakers = 2
         self.speaker_profiles = {1: [], 2: []}
         self.current_speaker = 1
@@ -98,7 +98,7 @@ class RealTimeTranscriber:
         speaker_id = self.identify_speaker(current_pitch)
         pitch_str = f"{current_pitch:.2f} Hz"
 
-        segments, _ = self.model.transcribe(audio_data, language="en")
+        segments, _ = self.model.transcribe(audio_data, language=LANGUAGE)
 
         for segment in segments:
             if segment.text.strip():
