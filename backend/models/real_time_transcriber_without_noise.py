@@ -7,7 +7,8 @@ from dotenv import dotenv_values
 from openai import AzureOpenAI
 from pydub import AudioSegment
 import librosa  # Add librosa import
-
+from agents.agent_executer import AgentExec
+from datetime import datetime
 
 class RealTimeTranscriber:
     def __init__(self, api_key=None, endpoint=None, deployment_id="whisper"):
@@ -23,6 +24,7 @@ class RealTimeTranscriber:
             azure_endpoint=self.endpoint,
             api_version="2024-05-01-preview",
         )
+        self.agent = AgentExec()
 
         self.q = queue.Queue()
         self.max_speakers = 2
@@ -166,6 +168,15 @@ class RealTimeTranscriber:
                                     language="en"
                                 )
                             text = result.text.strip()
+                                            # TODO here agentic logic
+                            print("Going into agent execution")
+                            input_time = datetime.now()
+                            suggestion = self.agent.execute(text.strip())
+                            end_time = datetime.now()
+                            print("Time: ", end_time - input_time)
+                            smart_msg = f"🤖 Smart Suggestion for {speaker_id}: {suggestion}"
+                            print(smart_msg)
+
                         except Exception as e:
                             print(f"Error during transcription API call: {e}")
                             text = ""
