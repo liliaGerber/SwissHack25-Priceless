@@ -9,12 +9,15 @@ from pydub import AudioSegment
 import librosa
 import copy
 
+from agents.agent_executer import AgentExec
+
+
 class RealTimeTranscriber:
     def __init__(self, api_key=None, endpoint=None, deployment_id="whisper"):
         config = dotenv_values()
         self.api_key = api_key or config.get("api_key") or os.getenv("api_key")
         self.endpoint = endpoint or config.get("endpoint") or os.getenv("endpoint")
-
+        self.agent = AgentExec()
         print(f"Using endpoint: {self.endpoint}")
 
         self.deployment_id = deployment_id
@@ -40,6 +43,9 @@ class RealTimeTranscriber:
             print(status)
         # Put raw float32 data into the queue
         self.q.put(indata.copy())
+
+    def initialize_agent_snippet(self):
+        self.agent.execute("67f9ebbe72b23bd97cd9ada3", self.current_segment_text)
 
     def get_pitch(self, audio_data, samplerate):
         try:
@@ -132,6 +138,7 @@ class RealTimeTranscriber:
                                 if self.current_segment_text.strip():
                                     print(f"=== Speaker {self.current_speaker} Finished ===")
                                     self.speaker_segments[self.current_speaker].append(self.current_segment_text.strip())
+                                    self.initialize_agent_snippet()
                                     self.current_segment_text = ""
                                 continue
                         else:
@@ -169,6 +176,7 @@ class RealTimeTranscriber:
                                 if self.current_segment_text.strip():
                                     print(f"=== Speaker {last_speaker_id} Finished ===")
                                     self.speaker_segments[last_speaker_id].append(self.current_segment_text.strip())
+                                    self.initialize_agent_snippet()
                                     self.current_segment_text = ""
                             self.current_segment_text += " " + text
 
@@ -178,6 +186,7 @@ class RealTimeTranscriber:
                 print("\nStopping transcription...")
                 if self.current_segment_text.strip():
                     self.speaker_segments[self.current_speaker].append(self.current_segment_text.strip())
+                    self.initialize_agent_snippet()
 
                 print("\n=== Full Conversation Summary ===")
                 for spk, segments in self.speaker_segments.items():
