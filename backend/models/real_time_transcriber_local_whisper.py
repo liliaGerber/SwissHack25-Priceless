@@ -9,6 +9,10 @@ import asyncio
 import websockets
 from faster_whisper import WhisperModel
 
+import sys, os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from agents.agent_executer_fast import AgentExecFast
+
 
 class RealTimeTranscriber:
     def __init__(self, ws_port=8765):
@@ -22,6 +26,7 @@ class RealTimeTranscriber:
         self.ws_port = ws_port
         self.clients = set()
         self.loop = asyncio.new_event_loop()
+        self.agent = AgentExecFast()
         threading.Thread(target=self._start_ws_loop, daemon=True).start()
 
     def _start_ws_loop(self):
@@ -100,6 +105,13 @@ class RealTimeTranscriber:
                 message = f"[Speaker {speaker_id}] (Pitch: {pitch_str}): {segment.text.strip()}"
                 print(message)
                 asyncio.run_coroutine_threadsafe(self.broadcast(message), self.loop)
+                # 🔥 Call the agent with the transcription
+                # TODO here agentic logic
+                print("Going into agent execution")
+                suggestion = self.agent.execute(segment.text.strip())
+                smart_msg = f"🤖 Smart Suggestion for {speaker_id}: {suggestion}"
+                print(smart_msg)
+                asyncio.run_coroutine_threadsafe(self.broadcast(smart_msg), self.loop)
 
     async def broadcast(self, message):
         if self.clients:
