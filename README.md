@@ -177,3 +177,6 @@ Used during container builds to initialize Mongo collections or persist across r
 
 Open an [issue](https://github.com/liliaGerber/SwissHack25-Priceless/issues) or contact [@liliaGerber](https://github.com/liliaGerber).
 
+
+// For Mac 
+brew install python-tk
