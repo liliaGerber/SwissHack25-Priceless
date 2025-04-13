@@ -16,7 +16,7 @@ class MarketInput(BaseModel):
 
 class TopStocksTool(BaseTool):
     name:str = "top_stocks_tool"
-    description: str = "Fetch top 3 performing stocks in a given equity market over the last 3 days and generate a price plot."
+    description: str = "Fetches top 3 performing stocks in a given equity market over the last 3 days and generates a price plot."
     args_schema: Type[BaseModel] = MarketInput
 
     def _run(self, market: str):

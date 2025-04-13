@@ -1,9 +1,12 @@
 from langchain.chat_models import azure_openai
 from langchain.agents import initialize_agent, AgentType
 from dotenv import dotenv_values
-from tools.prices_tool import TopStocksTool
-from tools.mortgage_calculator import MortgageCalculatorTool
-from tools.retreiver_tool import LocalFileDisplayTool
+import sys, os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from agents.tools.prices_tool import TopStocksTool
+from agents.tools.mortgage_calculator import MortgageCalculatorTool
+from agents.tools.retreiver_tool import LocalFileDisplayTool
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts import PromptTemplate
 
@@ -18,6 +21,7 @@ class AgentExec:
             model_name="gpt-4o-mini",
             deployment_name="gpt-4o-mini",
             temperature=0,
+            streaming=True
         )
 
         self.tools = [
@@ -38,7 +42,8 @@ class AgentExec:
     def execute(self, query):
         result = self.agent_executor.run(query)
         return result
-    
+
+
 if __name__ == "__main__":
     agent_exec = AgentExec()
     human_input = "Tell me about the top stocks."

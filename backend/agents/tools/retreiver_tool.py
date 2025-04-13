@@ -10,7 +10,7 @@ import time
 
 class LocalFileDisplayTool(BaseTool):
     name: str = "LocalFileDisplayTool"
-    description: str = "Reads local text files from a directory and shows their content in a popup window for 20 seconds."
+    description: str = "Reads local text files from a directory and shows their content in a popup window for 20 seconds.Fluent text, keep it short"
     
     def __init__(self):
         super().__init__()

@@ -6,19 +6,39 @@ from pydantic import BaseModel, Field
 
 
 class MortgageInput(BaseModel):
-    principal: float = Field(..., description="Loan amount or Principal in currency units")
+
+    principal: float = Field(1000, description="Loan amount")
+    annual_rate: float = Field(3.5, description="Annual interest rate in percent")
+    years: int = Field(10, description="Loan term in years")
+    down_payment: float = Field(0.0, description="Optional down payment")
+
+def amortization_schedule(loan_amount=1000, r=3.5, n=10, monthly=100):
+    balance = loan_amount
+    schedule = []
+    for i in range(1, n + 1):
+        interest = balance * r
+        principal_payment = monthly - interest
+        balance -= principal_payment
+        if i % 12 == 0 or i == n:
+            schedule.append({
+                "year": i // 12,
+                "remaining_balance": round(balance, 2),
+                "interest_paid": round(interest * 12, 2),
+                "principal_paid": round(principal_payment * 12, 2)
+            })
+    return schedule
 
 
 class MortgageCalculatorTool(BaseTool):
     name: str = "mortgage_calculator_tool"
-    description:str = "Calculate monthly mortgage payment, total payment, and total interest"
+    # Total number of payments
+    description: str = "Calculate monthly mortgage payment, total payment, total interest, LTV, and amortization schedule. uses interest rate of 3.5% for 10 years with a 1000€ loan if no other values specified. lists the values of the calculation. no markdown"
     args_schema: Type[BaseModel] = MortgageInput
 
-    def _run(self, principal: float) -> dict:
-        annual_rate = 3.5
-        years = 30
-        r = annual_rate / 100 / 12  # Monthly interest rate
-        n = years * 12              # Total number of payments
+    def _run(self, principal=10000, annual_rate=100, years=10, down_payment=200) -> dict:
+        loan_amount = principal - down_payment
+        r = annual_rate / 100 / 12  # monthly interest rate
+        n = years * 12              # total payments
 
         if r == 0:
             monthly_payment = principal / n
