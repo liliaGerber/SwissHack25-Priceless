@@ -14,8 +14,6 @@
     />
     <div v-else class="text-white text-center text-lg mt-10">
       Please select a customer from the sidebar.
-      {{cust_data}}
-
     </div>
   </div>
 </template>
@@ -26,8 +24,5 @@ import CustomerSidebar from '@/components/SidebarComponent.vue'
 import UserDashboardUser from '@/components/userDashboard/UserDashboardMain.vue'
 import {customers} from '@/data/customers.ts'
 import {useBasicApiDataStore} from "@/stores/BasicAPIData.ts";
-
-const cust_data = useBasicApiDataStore().customers
-
 const selectedCustomer = ref()
 </script>

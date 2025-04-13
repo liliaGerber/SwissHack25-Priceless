@@ -142,7 +142,7 @@ def seed_customers(num_customers=20):
         print("Error: No advisors found. Seed advisors first.")
         return
     advisor_id = random.choice(advisor_ids)["_id"]
-    with open("./data/customers.json", "r") as f:
+    with open("../data/customers.json", "r") as f:
             data = json.load(f)
 
     if isinstance(data, list):
@@ -155,13 +155,26 @@ def seed_customers(num_customers=20):
 
     print("Seeded customers.")
 
+def seed_meetings():
+    with open("../data/meetings.json", "r") as f:
+            data = json.load(f)
+
+    if isinstance(data, list):
+            db.summaries.insert_many(data)
+    else:
+            db.summaries.insert_one(data)
+
+    print("Seeded summaries.")
+
 
 def seed_database():
     print(f"Using database: {DB_NAME}")
 
 
     seed_advisors()
-    seed_customers(num_customers=50) # Generate 50 customers
+    seed_customers()
+    seed_meetings()
+
 
 # --- Run the Seeding ---
 if __name__ == "__main__":

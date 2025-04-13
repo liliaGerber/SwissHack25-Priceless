@@ -27,7 +27,7 @@ export const useBasicApiDataStore = defineStore('basicData', {
             this.loading = true;
             this.error = null;
             try {
-                const response = await api.get('/chat', {params: {prompt: prompt, user_id: user_id}});
+                const response = await api.get('/rag/interaction', {params: {prompt: prompt, user_id: user_id}});
                 this.data = response.data;
                 return response.data;
             } catch (error: any) {

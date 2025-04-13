@@ -1,0 +1,211 @@
+[
+  {
+    "customerId": "67faddfcbe21e70379c7753c",
+    "advisorId": "67fada14f8126e1fcae131d1",
+    "date": "2025-04-10",
+    "durationMinutes": 45,
+    "title": "Q2 Financial Planning Review",
+    "summary": "Layla expressed concern about the rising cost of living and how it’s affecting her savings rate. We reviewed her spending breakdown and found excess in discretionary categories. She was particularly interested in optimizing her emergency fund while keeping liquidity. We reallocated 10% of her savings into a short-term bond fund. Layla seemed relieved to have a concrete plan in place.",
+    "nextSteps": [
+      "Send Layla the PDF summary of her new savings allocation",
+      "Schedule follow-up in 6 weeks to evaluate emergency fund growth",
+      "Introduce digital tool for daily expense tracking"
+    ]
+  },
+  {
+    "customerId": "67fac30146f3d88f8354ca32",
+    "advisorId": "67fada14f8126e1fcae131d1",
+    "date": "2025-04-05",
+    "durationMinutes": 30,
+    "title": "Retirement Strategy Update",
+    "summary": "Ben was in a reflective mood, saying, 'Retirement still feels distant, but I know I need to take it seriously.' We walked through his current pension accounts and ran a quick forecast. He appreciated the visual charts and expressed a desire to avoid high-risk assets. We agreed on gradually shifting his investments toward fixed-income instruments starting Q3.",
+    "nextSteps": [
+      "Send a personalized investment shift plan (Q3)",
+      "Book next session to explore tax-shielded retirement products",
+      "Share reading list on low-volatility retirement strategies"
+    ]
+  },
+  {
+    "customerId": "67fac30146f3d88f8354ca31",
+    "advisorId": "67fada14f8126e1fcae131d1",
+    "date": "2025-03-28",
+    "durationMinutes": 60,
+    "title": "Exploring Investment Opportunities",
+    "summary": "Jonas lit up when we talked about technology ETFs, mentioning 'AI is where the future is — I want a piece of that.' We analyzed 3 different mid-cap AI funds and benchmarked them against his risk tolerance. He was cautious but curious, ultimately deciding to invest a small test amount.",
+    "nextSteps": [
+      "Monitor fund performance weekly and notify Jonas of significant changes",
+      "Prepare Q2 rebalancing suggestion with tech-heavy allocation options",
+      "Schedule a deeper portfolio diversification workshop"
+    ]
+  },
+  {
+    "customerId": "67fac30146f3d88f8354ca33",
+    "advisorId": "67fada14f8126e1fcae131d1",
+    "date": "2025-04-12",
+    "durationMinutes": 50,
+    "title": "Budgeting and Expense Review",
+    "summary": "When asked about monthly stressors, Elena said, 'I feel like I’m always behind on my rent savings.' We went through her fixed vs. variable costs and identified subscriptions she forgot she had. She was excited to try the budgeting template and was surprised how much clarity it gave her.",
+    "nextSteps": [
+      "Provide tailored budget template preloaded with her expense categories",
+      "Set calendar reminder for 1-month review check-in",
+      "Suggest gamified savings app to build consistent habits"
+    ]
+  },
+  {
+    "customerId": "67fac30146f3d88f8354ca35",
+    "advisorId": "67fada14f8126e1fcae131d1",
+    "date": "2025-04-02",
+    "durationMinutes": 40,
+    "title": "Credit Score Recovery Plan",
+    "summary": "Fabian mentioned, 'I didn’t even realize how much my credit card debt grew until I looked at the interest breakdown.' We ran a simulation on how faster payments would impact his score. He was highly engaged, asked lots of technical questions, and thanked me for not sugar-coating things.",
+    "nextSteps": [
+      "Send amortization table for accelerated payment plan",
+      "Review credit score monthly and alert if score changes +/-20",
+      "Share article: '5 Strategies to Boost Your Credit in 90 Days'"
+    ]
+  },
+  {
+    "customerId": "67fac30146f3d88f8354ca34",
+    "advisorId": "67fada14f8126e1fcae131d1",
+    "date": "2025-04-07",
+    "durationMinutes": 55,
+    "title": "Insurance Portfolio Review",
+    "summary": "Sophie admitted, 'Insurance has always confused me, I just pay and hope for the best.' We unpacked her current policies, highlighted underinsured areas, and discussed bundling options. She became very engaged when we touched on disability coverage. Sophie said she wants to be more 'proactive instead of reactive.'",
+    "nextSteps": [
+      "Send overview of bundled policy discount options",
+      "Refer Sophie to our partner advisor for legal coverage review",
+      "Schedule follow-up after policy adjustment to reassess risk profile"
+    ]
+  },
+  {
+    "customerId": "67fac30146f3d88f8354ca33",
+    "advisorId": "67fada14f8126e1fcae131d1",
+    "date": "2025-03-20",
+    "durationMinutes": 35,
+    "title": "Savings Goal Realignment",
+    "summary": "During the meeting, Elena shared: 'I’ve been saving, but it feels aimless. I want a bigger picture.' We visualized two savings paths — one for travel and one for a future down payment. She immediately leaned into the idea of a dedicated travel fund and requested a monthly savings automation plan.",
+    "nextSteps": [
+      "Prepare dual goal tracking dashboard (travel + housing)",
+      "Configure monthly automated savings trigger",
+      "Revisit in two months to monitor momentum and motivation"
+    ]
+  },
+  {
+    "customerId": "67fac30146f3d88f8354ca31",
+    "advisorId": "67fada14f8126e1fcae131d1",
+    "date": "2025-04-13",
+    "durationMinutes": 50,
+    "title": "Entrepreneurship Budget Planning",
+    "summary": "Jonas revealed: 'I’m thinking of launching a side project and I need to get serious about budgeting.' We examined his current spending and isolated €400/month that could be redirected. He appreciated the realism and said, 'This finally feels actionable.' He left energized and committed to tracking every euro.",
+    "nextSteps": [
+      "Send lean-startup-friendly budgeting spreadsheet",
+      "Create alert rule if discretionary spending exceeds €500/month",
+      "Set session in 6 weeks to assess business budget health"
+    ]
+  },
+   {
+    "customerId": "67fac30146f3d88f8354ca35",
+    "advisorId": "67fada14f8126e1fcae131d1",
+    "date": "2025-04-15",
+    "durationMinutes": 45,
+    "title": "Debt Restructuring Discussion",
+    "summary": "Fabian was candid: 'I'm overwhelmed with how much of my salary goes to credit card payments.' We mapped out a 3-phase restructuring plan and discussed the emotional impact of financial pressure. He seemed relieved and hopeful by the end of our talk.",
+    "nextSteps": [
+      "Share contact of partnered debt advisor",
+      "Prepare monthly spending cutback worksheet",
+      "Follow up in 3 weeks to check restructuring progress"
+    ]
+  },
+  {
+    "customerId": "67fac30146f3d88f8354ca34",
+    "advisorId": "67fada14f8126e1fcae131d1",
+    "date": "2025-04-08",
+    "durationMinutes": 60,
+    "title": "Goal-Based Financial Planning",
+    "summary": "Sophie said, 'It feels like I’m making money but not moving forward.' We worked backwards from her long-term goal of buying a flat and broke it down into short-term milestones. She liked seeing progress visualized and committed to a 12-month plan.",
+    "nextSteps": [
+      "Create 12-month plan with milestone triggers",
+      "Send monthly progress tracker template",
+      "Check in each quarter for realignment"
+    ]
+  },
+  {
+    "customerId": "67fac30146f3d88f8354ca33",
+    "advisorId": "67fada14f8126e1fcae131d1",
+    "date": "2025-03-30",
+    "durationMinutes": 30,
+    "title": "Expense Categorization & Clarity",
+    "summary": "Elena admitted she avoids looking at her transactions. We went over her statements and grouped recurring charges. She said, 'This is the first time it feels manageable.' She was eager to try auto-categorization tools.",
+    "nextSteps": [
+      "Activate categorization in banking app",
+      "Send list of suggested rule-based alerts",
+      "Review results during next session"
+    ]
+  },
+  {
+    "customerId": "67fac30146f3d88f8354ca32",
+    "advisorId": "67fada14f8126e1fcae131d1",
+    "date": "2025-04-11",
+    "durationMinutes": 40,
+    "title": "Passive Income Strategy",
+    "summary": "Ben said, 'I want to stop trading time for money.' We discussed rental income, dividend ETFs, and licensing his digital art. He was intrigued by the idea of creative income streams and said he'd explore a portfolio approach.",
+    "nextSteps": [
+      "Send breakdown of passive income sources with risk levels",
+      "Refer Ben to digital rights advisor",
+      "Create visual forecast of income mix"
+    ]
+  },
+  {
+    "customerId": "67fac30146f3d88f8354ca31",
+    "advisorId": "67fada14f8126e1fcae131d1",
+    "date": "2025-04-01",
+    "durationMinutes": 35,
+    "title": "Spending Awareness Session",
+    "summary": "Jonas said, 'I didn’t realize I spend over €100 monthly on food delivery.' We reviewed his statements and set caps for spending categories. He was receptive and asked for accountability nudges.",
+    "nextSteps": [
+      "Enable category spend limits and alerts",
+      "Send weekly spend recap to Jonas via email",
+      "Check in monthly to discuss behavior shifts"
+    ]
+  },
+  {
+    "customerId": "67faddfcbe21e70379c7753c",
+    "advisorId": "67fada14f8126e1fcae131d1",
+    "date": "2025-04-14",
+    "durationMinutes": 55,
+    "title": "Tax Optimization Walkthrough",
+    "summary": "Layla said, 'Taxes always sneak up on me, I want to feel more in control.' We walked through deductible options and clarified misconceptions about freelance income. She took detailed notes and was highly engaged.",
+    "nextSteps": [
+      "Share simplified tax checklist",
+      "Introduce Layla to a certified tax advisor",
+      "Setup a tax-saving tracker tied to quarterly goals"
+    ]
+  },
+  {
+    "customerId": "67fac30146f3d88f8354ca35",
+    "advisorId": "67fada14f8126e1fcae131d1",
+    "date": "2025-03-27",
+    "durationMinutes": 50,
+    "title": "Credit Card Optimization",
+    "summary": "Fabian was unsure if he's using his cards smartly. We reviewed reward structures, missed benefits, and APR tiers. He said, 'This is eye-opening — I thought I was doing okay.' He requested a comparison sheet for future reference.",
+    "nextSteps": [
+      "Prepare 3-card strategy plan (usage & rewards)",
+      "Set auto-payment sync reminder",
+      "Compare new card offers and share options"
+    ]
+  },
+  {
+    "customerId": "67fac30146f3d88f8354ca34",
+    "advisorId": "67fada14f8126e1fcae131d1",
+    "date": "2025-04-16",
+    "durationMinutes": 45,
+    "title": "Health & Financial Wellness Sync",
+    "summary": "Sophie said, 'I’ve been investing in my health, now I want my finances to match.' We discussed setting up a health savings reserve and aligning financial decisions with wellness goals. She appreciated the holistic approach.",
+    "nextSteps": [
+      "Setup separate wellness fund in her savings account",
+      "Recommend HSA-compatible investment accounts",
+      "Plan a themed check-in on 'money + mental clarity'"
+    ]
+  }
+
+]
