@@ -23,7 +23,6 @@ import {ref} from 'vue'
 import CustomerSidebar from '@/components/SidebarComponent.vue'
 import UserDashboardUser from '@/components/userDashboard/UserDashboardMain.vue'
 import {customers} from '@/data/customers.ts'
-
-
+import {useBasicApiDataStore} from "@/stores/BasicAPIData.ts";
 const selectedCustomer = ref()
 </script>

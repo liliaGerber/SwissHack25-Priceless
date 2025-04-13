@@ -1,5 +1,7 @@
+import json
 import random
 from datetime import datetime, timedelta
+from bson import ObjectId
 from pymongo import MongoClient
 
 
@@ -138,84 +140,31 @@ def seed_customers(num_customers=20):
     advisor_ids = list(db.advisors.find({}, {"_id": 1}))
     if not advisor_ids:
         print("Error: No advisors found. Seed advisors first.")
-        return 
+        return
+    advisor_id = random.choice(advisor_ids)["_id"]
+    with open("../data/customers.json", "r") as f:
+            data = json.load(f)
 
-    customers = []
-    for i in range(num_customers):
-        advisor_id = random.choice(advisor_ids)["_id"]
-        customer_name = get_random_name()
-        joined_date = generate_past_date(start_year=2018)
-
-        # Generate Financial Goals
-        num_goals = random.randint(0, 3)
-        financial_goals = []
-        if num_goals > 0:
-            chosen_goals = random.sample(GOAL_DESCRIPTIONS, num_goals)
-            for goal_desc in chosen_goals:
-                target = round(random.uniform(5000, 100000), 2)
-                saved = round(random.uniform(0, target * 0.8), 2)
-                financial_goals.append({
-                    "goal": goal_desc,
-                    "target_amount": target,
-                    "saved_amount": saved,
-                    "deadline": generate_future_date(min_years=1, max_years=15).strftime('%Y-%m-%d')
-                })
-
-        num_products = random.randint(1, 5)
-        used_products = random.sample(BANKING_PRODUCTS, num_products)
-
-        num_themes = random.randint(0, 2)
-        avoid_topics = []
-        if num_themes > 0:
-            avoid_topics = random.sample(PROBLEMATIC_THEMES, num_themes)
-
-        # Generate Connections
-        connections = []
-        if random.random() < 0.6: 
-            connections.append({"relationship": "Spouse", "name": get_random_name()})
-        num_children = random.randint(0, 3)
-        for _ in range(num_children):
-             connections.append({"relationship": "Child", "name": get_random_name()}) # Simple name generation
-
-        # Generate Last Meetings (summaries)
-        num_meetings = random.randint(1, 6)
-        summaries = []
-        last_meeting_date = joined_date + timedelta(days=random.randint(30, 90)) # First meeting after joining
-        for _ in range(num_meetings):
-             meeting_date = last_meeting_date + timedelta(days=random.randint(15, 180))
-             if meeting_date > datetime.now():
-                  meeting_date = generate_past_date(start_year=last_meeting_date.year)
-                  if meeting_date <= last_meeting_date:
-                      meeting_date = last_meeting_date + timedelta(days=random.randint(1,10))
-
-
-             summaries.append({
-                 "date": meeting_date.strftime('%Y-%m-%d'),
-                 "note": generate_meeting_note(financial_goals, used_products)
-             })
-             last_meeting_date = meeting_date 
-        summaries.sort(key=lambda x: datetime.strptime(x['date'], '%Y-%m-%d'))
-
-
-        customers.append({
-            "name": customer_name,
-            "email": f"{customer_name.lower().replace(' ', '.')}@example.com",
-            "joined": joined_date,
-            "balance": round(random.uniform(500, 25000), 2), 
-            "advisor_id": advisor_id,
-            "financial_goals": financial_goals,
-            "used_products": used_products,
-            "avoidTopics": avoid_topics,
-            "connections": connections,
-            "summaries": summaries
-    
-        })
-
-    if customers:
-        db.customers.insert_many(customers)
-        print(f"Seeded {len(customers)} customers.")
+    if isinstance(data, list):
+            for customer in data:
+                customer["advisorId"] = ObjectId(advisor_id)
+            db.customers.insert_many(data)
     else:
-        print("No customers generated.")
+            data["advisorId"] = ObjectId(advisor_id)
+            db.customers.insert_one(data)
+
+    print("Seeded customers.")
+
+def seed_meetings():
+    with open("../data/meetings.json", "r") as f:
+            data = json.load(f)
+
+    if isinstance(data, list):
+            db.summaries.insert_many(data)
+    else:
+            db.summaries.insert_one(data)
+
+    print("Seeded summaries.")
 
 
 def seed_database():
@@ -223,7 +172,9 @@ def seed_database():
 
 
     seed_advisors()
-    seed_customers(num_customers=50) # Generate 50 customers
+    seed_customers()
+    seed_meetings()
+
 
 # --- Run the Seeding ---
 if __name__ == "__main__":

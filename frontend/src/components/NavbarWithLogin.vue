@@ -10,7 +10,7 @@ const drawer = ref(false);
 
 const links = [
   {name: "Home", path: "/"},
-  {name: "My Customers", path: "/team"},
+  // {name: "My Customers", path: "/team"},
   {name: "History", path: "/contact"},
 ];
 const mainStore = useMainInformationStore();
@@ -27,7 +27,7 @@ const mainStore = useMainInformationStore();
       </template>
     </v-toolbar-items>
     <v-spacer></v-spacer>
-    <v-btn to="/login">Login</v-btn>
+    <v-btn to="/login">Logout</v-btn>
   </v-app-bar>
 
   <!--  Mobile View-->

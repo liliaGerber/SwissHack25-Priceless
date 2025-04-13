@@ -3,7 +3,7 @@ import {Customer} from "@/types/Customer.ts";
 export const customers = [
     {
         name: 'Layla Odam',
-        id: 'CUST-2048',
+        id: '67fac30146f3d88f8354ca28',
         email: 'layla.odam@bank.com',
         phone: '+43 660 123456',
         address: 'Seestadtstraße 1, 1220 Vienna, Austria',
@@ -140,7 +140,7 @@ export const customers = [
         summary: 'Layla is a consistent mobile banking user with good credit and moderate risk. Shs responsive and values efficiency.'
     }, {
         name: 'Ben Dajsdfgjh',
-        id: 'CUST-2099',
+        id: '67fac30146f3d88f8354ca27',
         email: 'ben.dajsdfgjh@finbank.com',
         phone: '+43 699 987654',
         address: 'Landstraßer Hauptstraße 44, 1030 Vienna, Austria',

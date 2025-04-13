@@ -1,0 +1,674 @@
+ [
+{
+  "name": "Anna Müller",
+  "id": "67fac30146f3d88f8354ca31",
+  "email": "anna.mueller@sparbank.at",
+  "phone": "+43 664 112233",
+  "address": "Mariahilfer Straße 101, 1060 Vienna, Austria",
+  "accountNumber": "5566778899",
+  "status": "Active",
+  "birthdate": "1992-10-03",
+  "lastLogin": "2025-04-11 18:20",
+  "avatar": "https://i.pravatar.cc/150?img=45",
+  "financial_data": {
+    "accounts": [
+      {
+        "type": "checking",
+        "iban": "AT231904300112233445",
+        "balance": 2378.40,
+        "currency": "EUR",
+        "monthly_inflow": 3100.0,
+        "monthly_outflow": 2720.1,
+        "last_updated": "2025-04-10"
+      },
+      {
+        "type": "savings",
+        "iban": "AT231904300556677889",
+        "balance": 9800.0,
+        "currency": "EUR",
+        "interest_rate": 0.9,
+        "goal": "Wedding fund",
+        "last_updated": "2025-04-09"
+      }
+    ],
+    "investments": [
+      {
+        "type": "etf",
+        "name": "Vanguard S&P 500 ETF",
+        "value": 4600.0,
+        "currency": "EUR",
+        "risk_level": "medium",
+        "performance_ytd": 5.8
+      }
+    ],
+    "loans": [
+      {
+        "type": "auto_loan",
+        "amount": 20000.0,
+        "remaining_balance": 8500.0,
+        "monthly_payment": 330.0,
+        "interest_rate": 2.1,
+        "term_years": 5,
+        "start_date": "2022-05-01",
+        "end_date": "2027-05-01"
+      }
+    ],
+    "credit_cards": [
+      {
+        "card_type": "Visa Classic",
+        "credit_limit": 4000.0,
+        "current_balance": 1180.5,
+        "last_payment_date": "2025-04-07",
+        "minimum_due": 75.0,
+        "due_date": "2025-04-25"
+      }
+    ],
+    "income": {
+      "source": "Marketing Manager - DigitalWerks GmbH",
+      "monthly_salary": 3100.0,
+      "bonus": 500.0,
+      "last_bonus_date": "2025-02-15",
+      "salary_payment_day": 27
+    },
+    "expenses": {
+      "fixed_monthly": [
+        { "description": "Rent", "amount": 890.0 },
+        { "description": "Insurance", "amount": 140.0 },
+        { "description": "Phone & Internet", "amount": 90.0 }
+      ],
+      "variable_monthly": [
+        { "description": "Groceries", "average": 320.0 },
+        { "description": "Dining Out", "average": 150.0 },
+        { "description": "Fitness", "average": 60.0 }
+      ]
+    },
+    "financial_goals": [
+      {
+        "goal": "Buy a car",
+        "target_amount": 15000.0,
+        "saved_amount": 7200.0,
+        "deadline": "2026-12-01"
+      }
+    ],
+    "credit_score": {
+      "score": 715,
+      "rating": "Good",
+      "last_checked": "2025-03-22"
+    }
+  },
+  "hobbies": ["Yoga", "Baking", "Reading"],
+  "avoidTopics": ["Credit Issues", "Missed Payments"],
+  "behavior": {
+    "appLogins": 17,
+    "transactions": 41,
+    "engagement": 62
+  },
+  "suggestions": ["Discuss loan restructuring", "Offer ETF portfolio review"],
+  "interactions": [
+    { "date": "2025-03-30", "note": "Asked about ETF investment options" },
+    { "date": "2025-02-18", "note": "Inquired about wedding savings accounts" }
+  ],
+  "upcomingTopics": ["Wedding fund", "Car purchase"],
+  "summary": "Anna is financially disciplined, actively engaged with digital banking tools, and planning key life events. She prefers structured savings and moderate-risk investments."
+},
+{
+  "name": "Lukas Steiner",
+  "id": "67fac30146f3d88f8354ca32",
+  "email": "lukas.steiner@finplus.at",
+  "phone": "+43 681 445566",
+  "address": "Hauptplatz 3, 8010 Graz, Austria",
+  "accountNumber": "9988776655",
+  "status": "Active",
+  "birthdate": "1988-02-21",
+  "lastLogin": "2025-04-10 16:45",
+  "avatar": "https://i.pravatar.cc/150?img=12",
+  "financial_data": {
+    "accounts": [
+      {
+        "type": "checking",
+        "iban": "AT751900300123456789",
+        "balance": 3420.60,
+        "currency": "EUR",
+        "monthly_inflow": 3400.0,
+        "monthly_outflow": 2950.8,
+        "last_updated": "2025-04-09"
+      },
+      {
+        "type": "savings",
+        "iban": "AT751900300987654321",
+        "balance": 6200.0,
+        "currency": "EUR",
+        "interest_rate": 0.85,
+        "goal": "New Kitchen",
+        "last_updated": "2025-04-08"
+      }
+    ],
+    "investments": [
+      {
+        "type": "stock",
+        "name": "Alphabet Inc.",
+        "ticker": "GOOGL",
+        "value": 4200.0,
+        "currency": "EUR",
+        "shares": 12,
+        "purchase_price": 125.0,
+        "current_price": 140.0
+      }
+    ],
+    "loans": [],
+    "credit_cards": [
+      {
+        "card_type": "Mastercard Standard",
+        "credit_limit": 3500.0,
+        "current_balance": 875.0,
+        "last_payment_date": "2025-03-31",
+        "minimum_due": 65.0,
+        "due_date": "2025-04-20"
+      }
+    ],
+    "income": {
+      "source": "Project Manager - AlpinSolutions AG",
+      "monthly_salary": 3400.0,
+      "bonus": 800.0,
+      "last_bonus_date": "2024-12-15",
+      "salary_payment_day": 25
+    },
+    "expenses": {
+      "fixed_monthly": [
+        { "description": "Mortgage", "amount": 920.0 },
+        { "description": "Electricity & Water", "amount": 160.0 },
+        { "description": "Car Insurance", "amount": 110.0 }
+      ],
+      "variable_monthly": [
+        { "description": "Groceries", "average": 380.0 },
+        { "description": "Dining Out", "average": 170.0 },
+        { "description": "Hobbies", "average": 130.0 }
+      ]
+    },
+    "financial_goals": [
+      {
+        "goal": "Renovate kitchen",
+        "target_amount": 8000.0,
+        "saved_amount": 6200.0,
+        "deadline": "2025-09-30"
+      }
+    ],
+    "credit_score": {
+      "score": 738,
+      "rating": "Good",
+      "last_checked": "2025-03-12"
+    }
+  },
+  "hobbies": ["Running", "Chess", "Cooking"],
+  "avoidTopics": ["Loan defaults", "Investment risks"],
+  "behavior": {
+    "appLogins": 24,
+    "transactions": 52,
+    "engagement": 71
+  },
+  "suggestions": ["Offer stock portfolio diversification", "Recommend high-yield savings"],
+  "interactions": [
+    { "date": "2025-03-12", "note": "Asked about tax savings strategies" },
+    { "date": "2025-01-20", "note": "Discussed refinancing options" }
+  ],
+  "upcomingTopics": ["Kitchen renovation", "Stock optimization"],
+  "summary": "Lukas is a detail-oriented planner who prefers stability in finances, values investment advice, and engages frequently with digital banking services."
+},
+{
+  "name": "Clara Huber",
+  "id": "67fac30146f3d88f8354ca33",
+  "email": "clara.huber@bankunion.at",
+  "phone": "+43 676 554433",
+  "address": "Getreidegasse 12, 5020 Salzburg, Austria",
+  "accountNumber": "4455667788",
+  "status": "Active",
+  "birthdate": "1991-09-17",
+  "lastLogin": "2025-04-12 08:35",
+  "avatar": "https://i.pravatar.cc/150?img=24",
+  "financial_data": {
+    "accounts": [
+      {
+        "type": "checking",
+        "iban": "AT161400000112233445",
+        "balance": 2945.80,
+        "currency": "EUR",
+        "monthly_inflow": 2950.0,
+        "monthly_outflow": 2630.0,
+        "last_updated": "2025-04-10"
+      },
+      {
+        "type": "savings",
+        "iban": "AT161400000556677889",
+        "balance": 12050.0,
+        "currency": "EUR",
+        "interest_rate": 1.0,
+        "goal": "Travel Fund",
+        "last_updated": "2025-04-09"
+      }
+    ],
+    "investments": [
+      {
+        "type": "mutual_fund",
+        "name": "Euro Growth Opportunities",
+        "value": 3700.0,
+        "currency": "EUR",
+        "risk_level": "low",
+        "performance_ytd": 3.4
+      },
+      {
+        "type": "stock",
+        "name": "Siemens AG",
+        "ticker": "SIE",
+        "value": 2200.0,
+        "currency": "EUR",
+        "shares": 8,
+        "purchase_price": 245.0,
+        "current_price": 275.0
+      }
+    ],
+    "loans": [
+      {
+        "type": "student_loan",
+        "amount": 15000.0,
+        "remaining_balance": 3500.0,
+        "monthly_payment": 200.0,
+        "interest_rate": 1.9,
+        "term_years": 10,
+        "start_date": "2018-10-01",
+        "end_date": "2028-10-01"
+      }
+    ],
+    "credit_cards": [
+      {
+        "card_type": "Visa Green",
+        "credit_limit": 3000.0,
+        "current_balance": 980.0,
+        "last_payment_date": "2025-04-01",
+        "minimum_due": 70.0,
+        "due_date": "2025-04-18"
+      }
+    ],
+    "income": {
+      "source": "Financial Analyst - AlpenInvest GmbH",
+      "monthly_salary": 2950.0,
+      "bonus": 700.0,
+      "last_bonus_date": "2025-01-10",
+      "salary_payment_day": 28
+    },
+    "expenses": {
+      "fixed_monthly": [
+        { "description": "Apartment Rent", "amount": 850.0 },
+        { "description": "Health Insurance", "amount": 180.0 },
+        { "description": "Phone & Internet", "amount": 75.0 }
+      ],
+      "variable_monthly": [
+        { "description": "Groceries", "average": 310.0 },
+        { "description": "Fitness Classes", "average": 90.0 },
+        { "description": "Weekend Trips", "average": 160.0 }
+      ]
+    },
+    "financial_goals": [
+      {
+        "goal": "Round-the-world trip",
+        "target_amount": 20000.0,
+        "saved_amount": 12050.0,
+        "deadline": "2026-08-01"
+      }
+    ],
+    "credit_score": {
+      "score": 729,
+      "rating": "Good",
+      "last_checked": "2025-03-28"
+    }
+  },
+  "hobbies": ["Rock Climbing", "Photography", "Piano"],
+  "avoidTopics": ["Missed Loan Payments", "Market Crash"],
+  "behavior": {
+    "appLogins": 20,
+    "transactions": 50,
+    "engagement": 69
+  },
+  "suggestions": ["Promote travel insurance bundle", "Discuss ETF portfolio strategy"],
+  "interactions": [
+    { "date": "2025-03-22", "note": "Asked about round-the-world travel insurance options" },
+    { "date": "2025-02-08", "note": "Requested portfolio rebalancing review" }
+  ],
+  "upcomingTopics": ["Travel planning", "Loan final payment"],
+  "summary": "Clara is a financially aware customer with a strong savings habit and steady digital interaction. She enjoys travel and prefers low-risk investments aligned with lifestyle goals."
+},
+   {
+  "name": "Jonas Berger",
+  "id": "67fac30146f3d88f8354ca34",
+  "email": "jonas.berger@smartbank.at",
+  "phone": "+43 660 778899",
+  "address": "Kärntner Straße 22, 1010 Vienna, Austria",
+  "accountNumber": "3344556677",
+  "status": "Inactive",
+  "birthdate": "1983-06-04",
+  "lastLogin": "2025-03-28 13:10",
+  "avatar": "https://i.pravatar.cc/150?img=36",
+  "financial_data": {
+    "accounts": [
+      {
+        "type": "checking",
+        "iban": "AT401900300445566778",
+        "balance": 1580.75,
+        "currency": "EUR",
+        "monthly_inflow": 2800.0,
+        "monthly_outflow": 2600.3,
+        "last_updated": "2025-03-27"
+      },
+      {
+        "type": "savings",
+        "iban": "AT401900300998877665",
+        "balance": 3500.0,
+        "currency": "EUR",
+        "interest_rate": 0.6,
+        "goal": "Emergency Fund",
+        "last_updated": "2025-03-26"
+      }
+    ],
+    "investments": [
+      {
+        "type": "mutual_fund",
+        "name": "European Balanced Growth",
+        "value": 2100.0,
+        "currency": "EUR",
+        "risk_level": "medium",
+        "performance_ytd": 4.1
+      }
+    ],
+    "loans": [
+      {
+        "type": "personal_loan",
+        "amount": 12000.0,
+        "remaining_balance": 4600.0,
+        "monthly_payment": 300.0,
+        "interest_rate": 3.2,
+        "term_years": 5,
+        "start_date": "2021-04-01",
+        "end_date": "2026-04-01"
+      }
+    ],
+    "credit_cards": [
+      {
+        "card_type": "Visa Gold",
+        "credit_limit": 6000.0,
+        "current_balance": 1300.0,
+        "last_payment_date": "2025-03-20",
+        "minimum_due": 85.0,
+        "due_date": "2025-04-15"
+      }
+    ],
+    "income": {
+      "source": "IT Consultant - NextNet GmbH",
+      "monthly_salary": 2800.0,
+      "bonus": 0.0,
+      "last_bonus_date": "",
+      "salary_payment_day": 26
+    },
+    "expenses": {
+      "fixed_monthly": [
+        { "description": "Rent", "amount": 890.0 },
+        { "description": "Insurance", "amount": 150.0 },
+        { "description": "Phone & Internet", "amount": 85.0 }
+      ],
+      "variable_monthly": [
+        { "description": "Groceries", "average": 330.0 },
+        { "description": "Streaming Subscriptions", "average": 45.0 },
+        { "description": "Dining Out", "average": 120.0 }
+      ]
+    },
+    "financial_goals": [
+      {
+        "goal": "Emergency fund",
+        "target_amount": 5000.0,
+        "saved_amount": 3500.0,
+        "deadline": "2026-01-01"
+      }
+    ],
+    "credit_score": {
+      "score": 702,
+      "rating": "Fair",
+      "last_checked": "2025-03-18"
+    }
+  },
+  "hobbies": ["Board Games", "Running", "Coding"],
+  "avoidTopics": ["Job Loss", "Investment Volatility"],
+  "behavior": {
+    "appLogins": 10,
+    "transactions": 38,
+    "engagement": 55
+  },
+  "suggestions": ["Propose savings booster", "Offer card cashback upgrade"],
+  "interactions": [
+    { "date": "2025-02-05", "note": "Asked about emergency fund advice" },
+    { "date": "2025-01-14", "note": "Inquired about salary advance option" }
+  ],
+  "upcomingTopics": ["Loan completion", "Savings interest"],
+  "summary": "Jonas is a practical and moderate-risk user with consistent spending and stable income. Prefers efficient service and values peace-of-mind financial tools."
+},
+   {
+  "name": "Elena Wagner",
+  "id": "67fac30146f3d88f8354ca35",
+  "email": "elena.wagner@austriabank.at",
+  "phone": "+43 688 445522",
+  "address": "Museumstraße 14, 6020 Innsbruck, Austria",
+  "accountNumber": "1122334455",
+  "status": "Active",
+  "birthdate": "1995-11-25",
+  "lastLogin": "2025-04-10 10:18",
+  "avatar": "https://i.pravatar.cc/150?img=29",
+  "financial_data": {
+    "accounts": [
+      {
+        "type": "checking",
+        "iban": "AT501600000112233445",
+        "balance": 3125.90,
+        "currency": "EUR",
+        "monthly_inflow": 3200.0,
+        "monthly_outflow": 2850.0,
+        "last_updated": "2025-04-10"
+      },
+      {
+        "type": "savings",
+        "iban": "AT501600000998877665",
+        "balance": 8900.0,
+        "currency": "EUR",
+        "interest_rate": 1.2,
+        "goal": "Home Deposit",
+        "last_updated": "2025-04-09"
+      }
+    ],
+    "investments": [
+      {
+        "type": "etf",
+        "name": "MSCI World ETF",
+        "value": 5100.0,
+        "currency": "EUR",
+        "risk_level": "medium",
+        "performance_ytd": 7.2
+      }
+    ],
+    "loans": [],
+    "credit_cards": [
+      {
+        "card_type": "Visa Platinum",
+        "credit_limit": 8000.0,
+        "current_balance": 2100.0,
+        "last_payment_date": "2025-04-01",
+        "minimum_due": 95.0,
+        "due_date": "2025-04-19"
+      }
+    ],
+    "income": {
+      "source": "UX Designer - CreativeHive AG",
+      "monthly_salary": 3200.0,
+      "bonus": 600.0,
+      "last_bonus_date": "2024-12-30",
+      "salary_payment_day": 25
+    },
+    "expenses": {
+      "fixed_monthly": [
+        { "description": "Rent", "amount": 920.0 },
+        { "description": "Utilities", "amount": 160.0 },
+        { "description": "Insurance", "amount": 125.0 }
+      ],
+      "variable_monthly": [
+        { "description": "Groceries", "average": 300.0 },
+        { "description": "Work Lunch", "average": 150.0 },
+        { "description": "Travel", "average": 250.0 }
+      ]
+    },
+    "financial_goals": [
+      {
+        "goal": "Buy an apartment",
+        "target_amount": 50000.0,
+        "saved_amount": 8900.0,
+        "deadline": "2028-06-01"
+      }
+    ],
+    "credit_score": {
+      "score": 755,
+      "rating": "Good",
+      "last_checked": "2025-03-25"
+    }
+  },
+  "hobbies": ["Design", "Travel", "Pilates"],
+  "avoidTopics": ["Budget Constraints", "Risky Investments"],
+  "behavior": {
+    "appLogins": 27,
+    "transactions": 60,
+    "engagement": 78
+  },
+  "suggestions": ["Offer mortgage calculator", "Recommend ETF diversification"],
+  "interactions": [
+    { "date": "2025-03-10", "note": "Discussed apartment savings plan" },
+    { "date": "2025-02-22", "note": "Requested investment diversification info" }
+  ],
+  "upcomingTopics": ["Home buying", "ETF rebalance"],
+  "summary": "Elena is a tech-savvy and financially goal-driven user, highly engaged with digital banking, and planning a home purchase within 3 years."
+},
+   {
+  "name": "Fabian Leitner",
+  "id": "67fac30146f3d88f8354ca36",
+  "email": "fabian.leitner@valutabank.at",
+  "phone": "+43 699 998877",
+  "address": "Bahnhofstraße 8, 4020 Linz, Austria",
+  "accountNumber": "6677889900",
+  "status": "Active",
+  "birthdate": "1989-03-12",
+  "lastLogin": "2025-04-11 21:05",
+  "avatar": "https://i.pravatar.cc/150?img=41",
+  "financial_data": {
+    "accounts": [
+      {
+        "type": "checking",
+        "iban": "AT721900300556677889",
+        "balance": 3870.45,
+        "currency": "EUR",
+        "monthly_inflow": 3600.0,
+        "monthly_outflow": 3100.6,
+        "last_updated": "2025-04-10"
+      },
+      {
+        "type": "savings",
+        "iban": "AT721900300998877112",
+        "balance": 13500.0,
+        "currency": "EUR",
+        "interest_rate": 1.0,
+        "goal": "Vacation and emergency fund",
+        "last_updated": "2025-04-08"
+      }
+    ],
+    "investments": [
+      {
+        "type": "stock",
+        "name": "Nvidia Corp.",
+        "ticker": "NVDA",
+        "value": 7500.0,
+        "currency": "EUR",
+        "shares": 20,
+        "purchase_price": 280.0,
+        "current_price": 375.0
+      },
+      {
+        "type": "crypto",
+        "name": "Bitcoin",
+        "value": 4200.0,
+        "currency": "EUR",
+        "risk_level": "high",
+        "performance_ytd": 12.5
+      }
+    ],
+    "loans": [],
+    "credit_cards": [
+      {
+        "card_type": "Mastercard Gold",
+        "credit_limit": 7000.0,
+        "current_balance": 1900.0,
+        "last_payment_date": "2025-04-03",
+        "minimum_due": 100.0,
+        "due_date": "2025-04-20"
+      }
+    ],
+    "income": {
+      "source": "DevOps Engineer - NetSync Solutions",
+      "monthly_salary": 3600.0,
+      "bonus": 1200.0,
+      "last_bonus_date": "2025-01-15",
+      "salary_payment_day": 25
+    },
+    "expenses": {
+      "fixed_monthly": [
+        { "description": "Rent", "amount": 870.0 },
+        { "description": "Utilities", "amount": 200.0 },
+        { "description": "Insurance", "amount": 160.0 }
+      ],
+      "variable_monthly": [
+        { "description": "Groceries", "average": 400.0 },
+        { "description": "Tech gadgets", "average": 250.0 },
+        { "description": "Weekend trips", "average": 180.0 }
+      ]
+    },
+    "financial_goals": [
+      {
+        "goal": "Remote work setup",
+        "target_amount": 5000.0,
+        "saved_amount": 3500.0,
+        "deadline": "2025-10-01"
+      },
+      {
+        "goal": "Backup investment fund",
+        "target_amount": 10000.0,
+        "saved_amount": 6200.0,
+        "deadline": "2026-12-01"
+      }
+    ],
+    "credit_score": {
+      "score": 765,
+      "rating": "Excellent",
+      "last_checked": "2025-03-29"
+    }
+  },
+  "hobbies": ["Gaming", "Tennis", "DIY Projects"],
+  "avoidTopics": ["Crypto volatility", "Missed bonuses"],
+  "behavior": {
+    "appLogins": 33,
+    "transactions": 67,
+    "engagement": 88
+  },
+  "suggestions": ["Offer smart portfolio tracker", "Promote crypto tax reporting tool"],
+  "interactions": [
+    { "date": "2025-03-18", "note": "Asked about crypto regulation updates" },
+    { "date": "2025-01-30", "note": "Inquired about card upgrade options" }
+  ],
+  "upcomingTopics": ["Crypto safety", "High-yield savings plans"],
+  "summary": "Fabian is a tech-forward client with high engagement and interest in modern investment tools. He prefers flexibility and automation in financial management."
+}
+
+
+
+
+
+]
