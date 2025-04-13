@@ -7,7 +7,7 @@ class WhisperFaster:
         self.device = "cuda:0" if torch.cuda.is_available() else "cpu"
         self.pipe = pipeline(
             "automatic-speech-recognition",
-            model="openai/whisper-large-v3-turbo",  # select checkpoint from https://huggingface.co/openai/whisper-large-v3#model-details
+            mmodel="openai/whisper-small.en",  # select checkpoint from https://huggingface.co/openai/whisper-large-v3#model-details
             device=self.device,  # or mps for Mac devices
             model_kwargs={"attn_implementation": "flash_attention_2"}
             if is_flash_attn_2_available()
